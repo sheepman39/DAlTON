@@ -1,0 +1,78 @@
+classDiagram
+
+    class Compare{
+        - Week1
+        - Week2
+        - checChanges[]
+        - pioChanges[]
+        - wildChanges[]
+        + calculateChange()
+        + calculateMoves()
+    }
+
+    class Week {
+        - Checaugau
+        - Pioneer
+        - Wilderness
+
+        + changeChecaugau()
+        + getChecaugau()
+        + changePioneer()
+        + getPioneer()
+        + changeWilderness()
+        + getWilderness()
+    }
+    class Hill{
+        - sites[]
+
+    }
+
+    <<abstract>> Hill
+
+    class Checaugau {
+        name: Checaugau
+    }
+    class Pioneer {
+        name: Pioneer
+    }
+    class Wilderness {
+        name: Wilderness
+    }
+
+    class Site {
+        - units[]
+        - cots 
+        - tents
+
+        
+    }
+
+    class Unit{
+        - youthM
+        - youthF
+        - adultM
+        - youthF
+
+        + getCots()
+        + setCots()
+        + getTents()
+        + setTents()
+
+        + getYouth()
+        + setYouth()
+        + getAdults()
+        + setAdults()
+    }
+
+    Pioneer o-- Site
+    Checaugau o-- Site
+    Wilderness o-- Site
+    Week o-- Pioneer
+    Week o-- Checaugau
+    Week o-- Wilderness
+    Site o-- Unit
+    Compare o--Week
+    Hill <|-- Pioneer
+    Hill <|-- Checaugau
+    Hill <|-- Wilderness
+    
