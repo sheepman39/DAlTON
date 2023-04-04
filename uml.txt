@@ -1,50 +1,75 @@
 classDiagram
 
-    class Week {
+    class Calculate{
+        - sessions[]
+
+        + load()
+        + save()
+
+        + editWeek()
+
+        + calculateWeeks(Week, Week)
+        + calculateHills(Hill, Hill)
+    }
+    class Week{
         - Checaugau
         - Pioneer
-        - Wilderness
+        - Wildernes
 
-        + changeChecaugau()
         + getChecaugau()
-        + changePioneer()
         + getPioneer()
-        + changeWilderness()
         + getWilderness()
+        
+        + editChecaugau()
+        + editPioneer()
+        + editWilderness()
     }
     class Hill{
         - sites[]
+        
+        + getSites()
+        + getTotalCots()
+        + getTotalTents()
+
+        + editSites()
     }
 
     <<abstract>> Hill
 
     class Site {
         - units[]
-        - cots 
-        - tents
+
         + getUnits()
-        + getCots()
-        + setCots()
-        + getTents()
-        + setTents()
+        
+        + getCots(): int
+        + getTents(): int
+
+        + addUnit()
+        + deleteUnit()
     }
 
     class Unit{
-        - youthM
-        - youthF
-        - adultM
-        - youthF
+        - youthM: int
+        - youthF: int
+        - adultM: int
+        - youthF: int
+        - extraCots: int
+        - extraTents: int
 
-        + getCots()
-        + setCots()
-        + getTents()
-        + setTents()
-
-        + getYouth()
-        + setYouth()
-        + getAdults()
-        + setAdults()
+        + getCots(): int
+        + getTents(): int
+        
+        + setExtraCots(int)
+        + setExtraTents(int)
+        
+        + getYouth(): int
+        + setYouth(int)
+        + getAdults(): int
+        + setAdults(int)
     }
 
     Site o-- Unit
+    Hill o-- Site
+    Week o-- Hill
+    Calculate o-- Week
     
