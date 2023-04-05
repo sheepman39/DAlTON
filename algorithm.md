@@ -76,3 +76,10 @@ Input - an integer
 Output - none
 
 Steps - this.extraTents = number
+---
+### Site
+Goal - store multiple units as a member of the site and calculate the total number of cots/tents needed in the site
+
+### Site.Site()
+Goal 
+
