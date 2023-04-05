@@ -34,10 +34,9 @@ classDiagram
         + editSites()
     }
 
-    <<abstract>> Hill
-
     class Site {
         - units[]
+        - siteNum: int 
 
         + getUnits()
         
@@ -46,6 +45,9 @@ classDiagram
 
         + addUnit()
         + deleteUnit()
+
+        + getSiteNum: int 
+        + setSiteNum(int)
     }
 
     class Unit{
@@ -66,10 +68,33 @@ classDiagram
         + setYouth(int)
         + getAdults(): int
         + setAdults(int)
+
+        + equals(Unit)
+    }
+
+    class GenericQ{
+        - head
+        + GenericQ()
+        + append(Node)
+        + pop(String)
+        + iterate(String)
+    }
+
+    class GenericNode{
+        - data 
+        - previous
+        - next 
+        + GenericNode()
+        + getData(): nodeType
+        + setData(nodeType)
+        + getNext(): GenericNode
+        + getPrevious(): GenericNode
+        + setNext(GenericNode)
+        + setPrevious(GenericNode)
     }
 
     Site o-- Unit
     Hill o-- Site
     Week o-- Hill
     Calculate o-- Week
-    
+    GenericQ o-- GenericNode
