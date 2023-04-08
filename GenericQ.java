@@ -27,8 +27,14 @@ public class GenericQ <NodeType> {
     
         System.out.println();
 
-        stringQ.iterate();
+        System.out.println("Length: " + stringQ.length());
+        System.out.println("0 index" + stringQ.get(0).getData());
+        System.out.println("1 index" + stringQ.get(1).getData());
+        System.out.println("2 index (should be null)" + stringQ.get(2));
 
+        GenericQ<Integer> emptyQ = new GenericQ<Integer>();
+        System.out.println("Length: " + emptyQ.length());
+        System.out.println("0 Index: " + emptyQ.get(0));
     } // end main
 
     public GenericQ(){
@@ -100,4 +106,50 @@ public class GenericQ <NodeType> {
 
         } // end while
     } // end iterate
-} // end GenericQ     
+    public int length(){
+
+        // start at the head
+        GenericNode <NodeType> currentNode = head;
+
+        // set length to 0
+        int length = 0;
+
+        // go through each element
+        while(currentNode != null){
+            
+            // increment length by 1
+            length ++;
+            
+            // go to the next node
+            currentNode = currentNode.getNext();
+
+        } // end while
+        
+        // return length
+        return length;
+    } // end length
+
+    public GenericNode <NodeType> get(int i){
+        
+        // until I figure a way to handle negative indices like python, this will return null if i<0
+        GenericNode <NodeType> currentNode = null;
+        if(i >= 0){
+            
+            // start at the head
+            currentNode = head;
+
+            // for loop to go through the list to find it
+            for(int j = 0; j < i; j++){
+                
+                // move the current node up
+                currentNode = currentNode.getNext();
+
+            } // end for loop
+            
+            // return the node at the i position
+            // will return null if there is none
+
+        } // end if statement
+        return currentNode;
+    } // end get
+}// end GenericQ     
