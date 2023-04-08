@@ -78,8 +78,113 @@ Output - none
 Steps - this.extraTents = number
 ---
 ### Site
-Goal - store multiple units as a member of the site and calculate the total number of cots/tents needed in the site
+Goal - store multiple units as a member of the site and return the total number of cots/tents needed in the site
 
 ### Site.Site()
-Goal 
+Goal - instantialize the attributes
 
+Input - None
+
+Output - None
+
+Steps - set the siteNum to -1, indicating that it has not been set yet
+
+### Site.Site(int siteNum)
+Goal - create a new site with the initial siteNum as the provided one
+
+Input - integer with the site number
+
+Output - None
+
+Steps - set this.siteNum to siteNum
+
+### Site.addUnit()
+Goal - create a new unit and append it t the siteQ
+
+Input - none
+
+Output - none
+
+Steps - create a new site called tempUnit.  The unit constructor will handle all input for the information.  Then, append it to the end of unitQ
+
+### Site.setSiteNum(int siteNum)
+Goal - Set the sites siteNum as the provided one
+
+Input - integer with the site number
+
+Output - None
+
+Steps - set this.siteNum to siteNum
+
+### Site.getSiteNum(): int
+Goal - get the site number
+
+Input - None
+
+Output - an integer containing the site number
+
+Steps - return this.siteNum
+
+### Site.getCots(): int and Site.getTents(): int
+Goal - return the number of cots and tents in a given site
+
+Input - none
+
+Output - integer representing the number of cots or tents in a site
+
+Steps - initialize a counter variable to 0.  Then use a for loop to iterate over the unitQ (treating it more like a traditional array) and count the number of tents/cots each unit returns
+
+---
+### GenericNode
+Goal - create a node that can be used with any type and (almost) every data structure we might need for this project
+
+### GenericNode.GenericNode()
+Goal - set each of the initial values to null
+
+Input - none
+
+Output - none
+
+Steps - set the data, previous, and next values to null
+
+### GenericNode.setData(NodeType data)
+Goal - set the data of the node to a provided object
+
+Input - an object of the type the node uses
+
+Output - None
+
+Steps - set this.data to the data provided
+
+### GenericNode.getData(): NodeType
+Goal - return the object the node is holding
+
+Input - none
+
+Output - An object of the same type the node uses
+
+Steps - return this.data
+
+### GenericNode.getNext() and .getPrevious(): GenericNode\<NodeType\>
+Goal - return the next node attached to the current one
+
+Input - none
+
+Output - a node that is next in a data structure
+
+Steps - return this.next; or this.previous;
+
+### GenericNode.setNext(GenericNode\<NodeType\> next) and GenericNode.setPrevious(GenericNode\<NodeType\>)
+Goal - set the previous or next node to a given node
+
+Input - a node of the same type 
+
+Output - none
+
+Steps - set this.next to next or this.previous to previous, respectively
+
+---
+### GenericQ
+Goal - create a queue data structure that can be used with any data structure
+
+### GenericQ

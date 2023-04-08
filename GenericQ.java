@@ -41,7 +41,7 @@ public class GenericQ <NodeType> {
         
         // set the head to null for now
         this.head = null;
-
+        this.tail = null;
     } // end Constructor
 
     public void append(NodeType data){
