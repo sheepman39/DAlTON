@@ -16,10 +16,9 @@ public class Unit{
     public static void main(String[] args){
 
         Unit testUnit = new Unit();
-        System.out.println(testUnit.getCots());
-        System.out.println(testUnit.getTents());
-    } // end main
+        testUnit.menu();
 
+    } // end main
 
     public Unit(){
 
@@ -112,19 +111,75 @@ public class Unit{
 
     } // end getTents
 
-    public int getYouth(){
+    public int getYouthM(){
         
-        // return the total yout
-        return this.youthM + this.youthF;
+        // return the total youth
+        return this.youthM;
 
-    } // end getYouth
+    } // end getYouthM
 
-    public int getAdults(){
+    public int getYouthF(){
+        
+        // return the total youth
+        return this.youthF;
 
-        // return the total adults
-        return this.adultM + this.youthF;
+    } // end getYouthf
+    
+    public int getAdultM(){
 
-    } // end getAdults
+        // return the num of adultM
+        return this.adultM;
+
+    } // end getAdultM
+
+    public int getAdultF(){
+
+        // return the num of adultF
+        return this.adultF;
+
+    } // end getAdultF
+
+    public void setYouthM(int num){
+
+        // set the number of youthM to the given amount
+        this.youthM = num;
+
+    }// end setYouthM
+    
+    public void setYouthF(int num){
+
+        // set the number of youthM to the given amount
+        this.youthF = num;
+
+    }// end setYouthF
+
+    public void setAdultM(int num){
+
+        // set the number of youthM to the given amount
+        this.adultM = num;
+
+    }// end setYouthM   
+
+    public void setAdultF(int num){
+
+        // set the number of youthM to the given amount
+        this.adultF = num;
+
+    }// end setAdultF   
+
+    public int getUnitNum(){
+
+        // return the unit number
+        return this.unitNum;
+
+    } // end getUnitNum
+
+    public void setUnitNum(int num){
+
+        // set the unit number
+        this.unitNum = num;
+
+    } // end setUnitNum
 
     public void setExtraCots(int number){
 
@@ -139,4 +194,100 @@ public class Unit{
         this.extraTents = number;
 
     } // end setExtraTents
+
+    public void menu(){
+
+        // define sentry variable
+        boolean keepGoing = true;
+
+        // loop to control the menu
+        while(keepGoing){
+
+            // create the new scanner for input
+            Scanner input = new Scanner(System.in);
+
+            // spacer
+            System.out.println();
+
+            // options
+            System.out.println();
+            System.out.println("Menu for unit #" + this.getUnitNum());
+            System.out.println("0) Quit");
+            System.out.println("1) Change unit num");
+            System.out.println("2) Change the number of members");
+            System.out.println("3) Request additional cots");
+            System.out.println("4) Request additional tents");
+            System.out.println("5) See all info");
+
+            // store the response in response
+            String response = input.nextLine();
+
+            // spacer
+            System.out.println();
+
+            // input handling
+            if(response.equals("0")){
+
+                // quit
+                keepGoing = false;
+
+            } else if(response.equals("1")){
+
+                // change the unit number
+                int num = integerInput("What would you like the new number to be?: ");
+                this.setUnitNum(num);
+
+                // confirmation message
+                System.out.println("Ok your unit number is now " + this.getUnitNum());
+
+            } else if(response.equals("2")){
+                
+                // change the number of members in the unit
+                this.youthM = this.integerInput("How many youth (m) do you have?");
+                this.youthF = this.integerInput("How many youth (f) do you have?");
+                this.adultM = this.integerInput("How many adults (m) do you have?");
+                this.adultF = this.integerInput("How many adults (f) do you have?");
+            
+            } else if(response.equals("3")){
+
+                // change the number of needed cots
+                System.out.println(this.getCots() - this.extraCots + " + " + this.extraTents + " extra requested = " + this.getCots() + " total cots");
+                int num = integerInput("How many extra cots are needed? ");
+                this.setExtraCots(num);
+                
+                // confirm message
+                System.out.println("Ok you now have " + this.getCots() + " cots");
+
+            } else if(response.equals("4")){
+
+                // change the number of needed tents
+                System.out.println(this.getTents() - this.extraTents + " + " + this.extraTents + " extra requested = " + this.getTents() + " total tents"); 
+                int num = integerInput("How many extra tents are needed? ");
+                this.setExtraTents(num);
+            
+                // confirm message
+                System.out.println("Ok you now have " + this.getTents() + " tents");
+
+            } else if(response.equals("5")){
+
+                // print out the current information for the troop
+                System.out.println("Information about Unit #" + this.getUnitNum());
+                System.out.println("Total Cots needed: " + this.getCots());
+                System.out.println("Total Tents needed: " + this.getTents());
+                System.out.println("Extra requested cots: " + this.extraCots);
+                System.out.println("Extra requested tents: " + this.extraTents);
+                System.out.println("Total youth (m): " + this.getYouthM());
+                System.out.println("Total youth (f): " + this.getYouthF());
+                System.out.println("Total adults (m): " + this.getAdultM());
+                System.out.println("Total adults (f): " + this.getAdultF());
+
+            } else {
+
+                // error message
+                System.out.println("Please put in a valid option");
+
+            } // end if/else block
+        } // end while
+    } // end menu
+
 } // end Unit

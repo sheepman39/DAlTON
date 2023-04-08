@@ -76,6 +76,26 @@ Input - an integer
 Output - none
 
 Steps - this.extraTents = number
+
+### Unit.menu()
+Goal - create a menu where the user can edit the unit
+
+Input - integers and responses from the user
+
+Output - none
+
+Steps - create a boolean variable called keepGoing and set it to true.  Then use a while loop to handle the input from the user.  Create a new scanner called input for user input.  Then print out the current information about the unit along with the menu of options
+|Option|Description|Method|
+|---|---|---|
+|0|Quit|keepGoing = false|
+|1|Change unit number|.setUnitNum|
+|2|Change the number of members| .setYouthM/F...|
+|3|Change the number of needed cots|.setExtraCots()|
+|4|Change the number of needed tents|.setExtraTents()|
+|5|See all info|lots of stuff|
+
+With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions.
+
 ---
 ### Site
 Goal - store multiple units as a member of the site and return the total number of cots/tents needed in the site
@@ -133,7 +153,11 @@ Input - none
 Output - integer representing the number of cots or tents in a site
 
 Steps - initialize a counter variable to 0.  Then use a for loop to iterate over the unitQ (treating it more like a traditional array) and count the number of tents/cots each unit returns
+d
+### Site.editUnits() 
+Goal - create a menu where the user can choose a unit to edit in a site
 
+Input - integer from the user
 ---
 ### GenericNode
 Goal - create a node that can be used with any type and (almost) every data structure we might need for this project
