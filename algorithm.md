@@ -187,4 +187,57 @@ Steps - set this.next to next or this.previous to previous, respectively
 ### GenericQ
 Goal - create a queue data structure that can be used with any data structure
 
-### GenericQ
+### GenericQ.GenericQ()
+Goal - set the head and tail to null
+
+Input - None
+
+Output - None 
+
+Steps - set this.head and this.tail to null
+
+### GenericQ.append(NodeType data)
+Goal - append an object to the end of the queue
+
+Input - an object of the same type as the queue
+
+Output - none
+
+Steps - first, create a new node of the same nodetype and call it newNode.  Then, set the data of that node to the data provided by the user.  If the head is null, set the head and tail of the queue to the new node.  Else, take the tail of the queue and set the newNode to the one next to the tail, making the newNode the new tail
+
+### GenericQ.pop(): NodeType
+Goal - return and remove the head of the queue to the user
+
+Input - none
+
+Output - A value the same data type as the node type
+
+Steps - create a GenericNode of NodeType type called poppedNode and set it to null. Then create a NodeType returnvalue set to null.  Check if the head is not null.  If the head exists, then set the popped node to the head.  Then set the head to the node after the poppedNode.  Then set the return value to the poppedNode's data.  Then return the returnValue, which will either be null if the queue is empty or some data value.
+
+### GenericQ.iterate()
+Goal - print out a list of all of the nodes in the queue
+
+Input - none
+
+Output - a string containing the data for each node in the queue
+
+Steps - Create a new node called currentNode and set it to head.  While the currentNode is not null, print out the data from the current node and then set currentNode to the next node in the queue.  This will allow for each element to be printed and for it to end when it gets to the end of the list.
+
+### GenericQ.length(): int
+Goal - return an integer reprsenting the length of the list
+
+Input - none
+
+Output - an integer representing the length of the list
+
+Steps - create a GenericNode called currentNode and currentNode gets head.  Also, create a length integer with the initial value of 0.  While the currentNode is not null, increment the length by 1 and then set the currentNode to the next node.  Once the loop is done, return the length.
+
+### GenericQ.get(int i): NodeType
+Goal - given an index, return the data in the node
+
+Input - an integer representing the index of the item in the queue
+
+Output - the data from a node at the index i
+
+Steps - Create a GenericNode called currentNode and set it to null.  Create a returnValue and set it to null. Then check if i is a non-negative number.  If it is, set the currentNode to head and then start a for loop iterating over j while j < i, j++.  In the for loop, set the currentNode to the next node.  This will allow us to find the currentNode at the i index.  Out of the for loop, set the return value to the data in the current node.  Then return the retturnValue, which will either be data or null.   
+

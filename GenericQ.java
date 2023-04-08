@@ -18,9 +18,7 @@ public class GenericQ <NodeType> {
         stringQ.iterate();
         System.out.println();
 
-        GenericNode<String> poppedNode = stringQ.pop();
-
-        String data = poppedNode.getData();
+        String data = stringQ.pop();
         
         // should be A
         System.out.println(data);
@@ -28,8 +26,8 @@ public class GenericQ <NodeType> {
         System.out.println();
 
         System.out.println("Length: " + stringQ.length());
-        System.out.println("0 index" + stringQ.get(0).getData());
-        System.out.println("1 index" + stringQ.get(1).getData());
+        System.out.println("0 index" + stringQ.get(0));
+        System.out.println("1 index" + stringQ.get(1));
         System.out.println("2 index (should be null)" + stringQ.get(2));
 
         GenericQ<Integer> emptyQ = new GenericQ<Integer>();
@@ -70,10 +68,11 @@ public class GenericQ <NodeType> {
         } // end if/else block
     } // end append
 
-    public GenericNode <NodeType> pop(){
+    public NodeType pop(){
 
         // pop the head to return the node to the user
         GenericNode <NodeType> poppedNode = null;
+        NodeType returnValue = null;
 
         // if the queue is empty, return null
         if(this.head != null){
@@ -83,10 +82,13 @@ public class GenericQ <NodeType> {
             poppedNode = this.head;
             this.head = poppedNode.getNext();
 
+            // since we want to return the data in the poppedNode, we will get it here
+            returnValue = poppedNode.getData();
+
         } // end if
 
-        // return the node
-        return poppedNode;
+        // return the value
+        return returnValue;
     
     } // end pop
 
@@ -129,10 +131,12 @@ public class GenericQ <NodeType> {
         return length;
     } // end length
 
-    public GenericNode <NodeType> get(int i){
+    public NodeType get(int i){
         
         // until I figure a way to handle negative indices like python, this will return null if i<0
         GenericNode <NodeType> currentNode = null;
+        NodeType returnValue = null;
+
         if(i >= 0){
             
             // start at the head
@@ -146,10 +150,10 @@ public class GenericQ <NodeType> {
 
             } // end for loop
             
-            // return the node at the i position
-            // will return null if there is none
+            // after finding the right node, get the data from the node
+            returnValue = currentNode.getData();
 
         } // end if statement
-        return currentNode;
+        return returnValue;
     } // end get
 }// end GenericQ     

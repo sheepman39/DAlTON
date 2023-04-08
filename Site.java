@@ -71,10 +71,10 @@ public class Site{
         for(int i = 0; i < this.unitQ.length(); i++){
             
             // get the tempNode from the queue
-            GenericNode<Unit> tempNode = this.unitQ.get(i);
+            Unit tempUnit = this.unitQ.get(i);
 
             // get the num of cots from the nodes data
-            cotNum += tempNode.getData().getCots();
+            cotNum += tempUnit.getCots();
     
         } // end for loop
 
@@ -90,10 +90,10 @@ public class Site{
         for(int i = 0; i < this.unitQ.length(); i++){
             
             // get the tempNode from the queue
-            GenericNode<Unit> tempNode = this.unitQ.get(i);
+            Unit tempUnit = this.unitQ.get(i);
 
             // get the num of tents from the nodes data
-            tentNum += tempNode.getData().getTents();
+            tentNum += tempUnit.getTents();
     
         } // end for loop
 
