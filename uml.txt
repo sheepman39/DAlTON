@@ -25,7 +25,7 @@ classDiagram
         + editWilderness()
     }
     class Hill{
-        - sites[]
+        - siteQ
         
         + getSites()
         + getTotalCots()
@@ -35,8 +35,11 @@ classDiagram
     }
 
     class Site {
-        - units[]
+        - unitQ
         - siteNum: int 
+
+        + Site()
+        + Site(int)
 
         + getUnits()
         
@@ -69,15 +72,18 @@ classDiagram
         + getAdults(): int
         + setAdults(int)
 
-        + equals(Unit)
+        + integerInput(str)
     }
 
     class GenericQ{
         - head
+        - tail
         + GenericQ()
-        + append(Node)
-        + pop(String)
-        + iterate(String)
+        + append(NodeType)
+        + pop(): NodeType
+        + iterate()
+        + length(): int 
+        + get(int): NodeType
     }
 
     class GenericNode{
@@ -98,3 +104,4 @@ classDiagram
     Week o-- Hill
     Calculate o-- Week
     GenericQ o-- GenericNode
+
