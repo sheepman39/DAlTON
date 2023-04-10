@@ -22,17 +22,17 @@ public class Unit{
 
     public Unit(){
 
-        this.unitNum = this.integerInput("What is your unit number?");
-        this.youthM = this.integerInput("How many youth (m) do you have?");
-        this.youthF = this.integerInput("How many youth (f) do you have?");
-        this.adultM = this.integerInput("How many adults (m) do you have?");
-        this.adultF = this.integerInput("How many adults (f) do you have?");
-        this.extraCots = this.integerInput("How many extra cots will you need?");
-        this.extraTents = this.integerInput("How many extra tents will you need?");
+        this.unitNum = integerInput("What is your unit number?");
+        this.youthM = integerInput("How many youth (m) do you have?");
+        this.youthF = integerInput("How many youth (f) do you have?");
+        this.adultM = integerInput("How many adults (m) do you have?");
+        this.adultF = integerInput("How many adults (f) do you have?");
+        this.extraCots = integerInput("How many extra cots will you need?");
+        this.extraTents = integerInput("How many extra tents will you need?");
 
     }// end constructor 
 
-    public int integerInput(String prompt){
+    public static int integerInput(String prompt){
 
         // sentry variable
         boolean keepGoing = true;
@@ -243,10 +243,10 @@ public class Unit{
             } else if(response.equals("2")){
                 
                 // change the number of members in the unit
-                this.youthM = this.integerInput("How many youth (m) do you have?");
-                this.youthF = this.integerInput("How many youth (f) do you have?");
-                this.adultM = this.integerInput("How many adults (m) do you have?");
-                this.adultF = this.integerInput("How many adults (f) do you have?");
+                this.youthM = integerInput("How many youth (m) do you have?");
+                this.youthF = integerInput("How many youth (f) do you have?");
+                this.adultM = integerInput("How many adults (m) do you have?");
+                this.adultF = integerInput("How many adults (f) do you have?");
             
             } else if(response.equals("3")){
 
@@ -270,16 +270,8 @@ public class Unit{
 
             } else if(response.equals("5")){
 
-                // print out the current information for the troop
-                System.out.println("Information about Unit #" + this.getUnitNum());
-                System.out.println("Total Cots needed: " + this.getCots());
-                System.out.println("Total Tents needed: " + this.getTents());
-                System.out.println("Extra requested cots: " + this.extraCots);
-                System.out.println("Extra requested tents: " + this.extraTents);
-                System.out.println("Total youth (m): " + this.getYouthM());
-                System.out.println("Total youth (f): " + this.getYouthF());
-                System.out.println("Total adults (m): " + this.getAdultM());
-                System.out.println("Total adults (f): " + this.getAdultF());
+                // print all of the information about the unit
+                this.printAllInfo();
 
             } else {
 
@@ -289,5 +281,19 @@ public class Unit{
             } // end if/else block
         } // end while
     } // end menu
-
+    
+    public void printAllInfo(){
+        
+        // print out the current information for the troop
+        System.out.println("Information about Unit #" + this.getUnitNum());
+        System.out.println("Total Cots needed: " + this.getCots());
+        System.out.println("Total Tents needed: " + this.getTents());
+        System.out.println("Extra requested cots: " + this.extraCots);
+        System.out.println("Extra requested tents: " + this.extraTents);
+        System.out.println("Total youth (m): " + this.getYouthM());
+        System.out.println("Total youth (f): " + this.getYouthF());
+        System.out.println("Total adults (m): " + this.getAdultM());
+        System.out.println("Total adults (f): " + this.getAdultF());
+    
+    } // end printAllInfo   
 } // end Unit

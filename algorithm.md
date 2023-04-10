@@ -96,6 +96,15 @@ Steps - create a boolean variable called keepGoing and set it to true.  Then use
 
 With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions.
 
+### Unit.printAllInfo()
+Goal - print out all of the information of the unit
+
+Input - none
+
+Output - multiple lines of text describing the unit
+
+Steps - print out all of the relevant attributes in a nice way
+
 ---
 ### Site
 Goal - store multiple units as a member of the site and return the total number of cots/tents needed in the site
@@ -154,8 +163,33 @@ Output - integer representing the number of cots or tents in a site
 
 Steps - initialize a counter variable to 0.  Then use a for loop to iterate over the unitQ (treating it more like a traditional array) and count the number of tents/cots each unit returns
 d
-### Site.editUnits() 
-Goal - create a menu where the user can choose a unit to edit in a site
+### Site.menu() 
+Goal - create a menu where the user can edit the various aspects of the site
+
+Input - responses from the user
+
+Output - none
+
+Steps - create a boolean variable called keepGoing and set it to true.  Then use a while loop to handle the input from the user.  Create a new scanner called input for user input.  Then print out the current information about the unit along with the menu of options
+|Option|Description|Method|
+|---|---|---|
+|0|Quit|keepGoing = false|
+|1|Change site number|.setSiteNum|
+|2|See all info|lots of stuff|
+|3|Add a unit|.addUnit()|
+|4|Edit a unit|unit.menu()|
+|5|Delete a unit|unitLL.delete()|
+
+With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions.
+
+### Site.printAllInfo()
+Goal - print out the information of the site including the information from the units
+
+Input - none
+
+Output - lines containing information about the site
+
+Steps - print out the site number, total cots/tents needed, number of units staying, and how many people are in each unit
 
 Input - integer from the user
 ---
