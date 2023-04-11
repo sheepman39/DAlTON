@@ -96,7 +96,7 @@ public class GenericLL <NodeType> {
                 }
             } // end inner if/else block
         } // end if
-    } // end pop
+    } // end delete
 
     public void iterate(){
 
