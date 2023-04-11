@@ -90,10 +90,14 @@ public class GenericLL <NodeType> {
                 // make sure to check for null values first
                 if(previous != null){
                     previous.setNext(next);
-                } 
+                } else {
+                    this.head = next;
+                } // end if/else
                 if(next != null){
                     next.setPrevious(previous);
-                }
+                } else {
+                    this.tail = previous;
+                } // end if/else
             } // end inner if/else block
         } // end if
     } // end delete
