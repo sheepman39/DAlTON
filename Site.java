@@ -1,4 +1,5 @@
 // Site.java
+import java.util.*;
 
 public class Site{
     
@@ -12,15 +13,7 @@ public class Site{
 
         Site testSite = new Site();
 
-        testSite.setSiteNum(2);
-
-        //        testSite.addUnit();
-//        testSite.addUnit();
-//        testSite.addUnit();
-
-        System.out.println("Cots needed for site " + testSite.getSiteNum() + ": " + testSite.getCots());
-
-        System.out.println("Tents needed for site " + testSite.getSiteNum() + ": " + testSite.getTents());
+        testSite.menu();
 
 
     } // end main
@@ -108,7 +101,7 @@ public class Site{
         return tentNum;
     } // end getCots
 
-        public void menu(){
+    public void menu(){
 
         // define sentry variable
         boolean keepGoing = true;
@@ -165,13 +158,32 @@ public class Site{
 
             } else if(response.equals("4")){
                 
-                // run a sub-menu to select which unit to edit
-                this.unitMenu();
+                // message to edit
+                System.out.println("Please select a unit to edit");
 
+                // run a sub-menu to select which unit to edit
+                int unitIndex = this.unitSelect();
+
+                // check if the response is greater than or equal to 0, meaning the user selected a valid response
+                if(unitIndex >= 0){
+
+                    // get the unit and run the menu
+                    this.unitLL.get(unitIndex).menu();
+                
+                } // end if
             } else if(response.equals("5")){
+                
+                // message to edit
+                System.out.println("Please select a unit to DELETE");
 
                 // delete a unit
-                
+                int unitIndex = this.unitSelect();
+
+                // check if the response is valid
+                if(unitIndex >= 0){
+                    // get the unit and delete it
+                    this.deleteUnit(unitIndex);
+                } // end if
             } else {
 
                 // error message
@@ -200,10 +212,13 @@ public class Site{
         } // end for loop
     } // end printAllInfo
 
-    public void unitMenu(){
+    public int unitSelect(){
 
         // sentry variable
         boolean keepGoing = true;
+
+        // set the default return value to -1 (invalid)
+        int returnValue = -1;
 
         // while loop to control user input
         while(keepGoing){
@@ -213,7 +228,7 @@ public class Site{
         
             // output all of the options for the units
             System.out.println("");
-            System.out.println("Please select a unit to edit");
+            System.out.println("Please select a unit");
 
             // display a quit message
             System.out.println("0) Quit and return to the site menu");
@@ -222,7 +237,7 @@ public class Site{
             for(int i = 0; i < this.unitLL.length(); i++){
                 
                 // print the option with the proper index
-                System.out.println(i + 1 + ") Edit" + this.unitLL.get(i).getUnitNum());
+                System.out.println(i + 1 + ") Select " + this.unitLL.get(i).getUnitNum());
             
             } // end for loop
 
@@ -242,18 +257,19 @@ public class Site{
                 response = input.nextInt();
                 
                 // check if the response is the same as the size of the dogs list
-                if(response.equals(this.unitLL.Length())){
+                if(response.equals(0)){
                 
                     // quit
                     keepGoing = false;
-
-                } else if(response < this.unitLL.Length()){
+                
+                // note: offset response by -1 since quit is 0
+                } else if(response - 1 < this.unitLL.length()){
 
                     if(response > 0){
                         
                         // if it is a valid index, run the menu of that unit
                         // note that it is -1 since we added 1 in the menu
-                        this.unitLL.get(response - 1).menu();
+                        returnValue = (response - 1);
                 
                     } else {
 
@@ -290,6 +306,9 @@ public class Site{
             
             } // end try/catch blocks
         } // end while loop 
+
+        // return the value
+        return returnValue;
     } // end unitMenu
 
 } // end site

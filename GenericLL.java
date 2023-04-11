@@ -87,9 +87,13 @@ public class GenericLL <NodeType> {
                 GenericNode <NodeType> next = targetNode.getNext();
 
                 // set the next and previous to the respective nodes, making the deleted node vanish into a poof of memory
-                previous.setNext(next);
-                next.setPrevious(previous);
-
+                // make sure to check for null values first
+                if(previous != null){
+                    previous.setNext(next);
+                } 
+                if(next != null){
+                    next.setPrevious(previous);
+                }
             } // end inner if/else block
         } // end if
     } // end pop
@@ -135,7 +139,7 @@ public class GenericLL <NodeType> {
     } // end length
 
     public NodeType get(int i){
-        
+
         // until I figure a way to handle negative indices like python, this will return null if i<0
         GenericNode <NodeType> currentNode = null;
         NodeType returnValue = null;
