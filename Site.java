@@ -46,7 +46,7 @@ public class Site{
 
         // delete the unit at the given index
         this.unitLL.delete(i);
-
+        
     } // end deleteUnit
     
     public void setSiteNum(int siteNum){
@@ -183,7 +183,9 @@ public class Site{
                 if(unitIndex >= 0){
                     // get the unit and delete it
                     this.deleteUnit(unitIndex);
-                } // end if
+                } else {
+                    System.out.println("Invalid unit. Nothing was deleted");
+                }// end if
             } else {
 
                 // error message
@@ -233,6 +235,23 @@ public class Site{
             // display a quit message
             System.out.println("0) Quit and return to the site menu");
 
+            // lets try to do this using nodes
+            // get the first node in the list
+            GenericNode <Unit> currentNode = unitLL.getNode(0);
+            
+            int counter = 1;
+            while(currentNode != null){
+
+                Unit tempUnit = currentNode.getData();
+
+                System.out.println(counter + ") Select " + tempUnit.getUnitNum());
+                // increment counter
+                counter++;
+
+                // get the next node
+                currentNode = currentNode.getNext();
+            } // end while loop
+            /*
             // use a for loop to display options for each of the units
             for(int i = 0; i < this.unitLL.length(); i++){
                 
@@ -240,7 +259,7 @@ public class Site{
                 System.out.println(i + 1 + ") Select " + this.unitLL.get(i).getUnitNum());
             
             } // end for loop
-
+            */
             // spacer
             System.out.println("");
             
