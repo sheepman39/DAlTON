@@ -35,13 +35,15 @@ classDiagram
     }
 
     class Site {
-        - unitQ
+        - unitLL
         - siteNum: int 
 
         + Site()
         + Site(int)
 
-        + getUnits()
+        + menu()
+        + printAllInfo()
+        + unitSelect()
         
         + getCots(): int
         + getTents(): int
@@ -54,6 +56,7 @@ classDiagram
     }
 
     class Unit{
+        - unitNum: int
         - youthM: int
         - youthF: int
         - adultM: int
@@ -61,18 +64,32 @@ classDiagram
         - extraCots: int
         - extraTents: int
 
+        + Unit()
+
+        + menu()
+
         + getCots(): int
         + getTents(): int
         
         + setExtraCots(int)
         + setExtraTents(int)
         
-        + getYouth(): int
-        + setYouth(int)
-        + getAdults(): int
-        + setAdults(int)
+        + getYouthM(): int
+        + getYouthF(): int
+        + getAdultM(): int
+        + getAdultF(): int
 
-        + integerInput(str)
+        + setYouthM(int)
+        + setYouthF(int)
+        + setAdultM(int)
+        + setAdultF(int)
+        
+        + getUnitNum() int 
+        + setUnitNum(int)
+
+        + printAllInfo()
+
+        + integerInput(str) STATIC
     }
 
     class GenericQ{
@@ -84,6 +101,20 @@ classDiagram
         + iterate()
         + length(): int 
         + get(int): NodeType
+    }
+
+    class GenericLL{
+        - head
+        - tail
+        
+        + GenericLL()
+
+        + append(NodeType)
+        + delete(int)
+        + iterate()
+        + length() int 
+        + get(int) NodeType 
+        + getNode(int) GenericNode
     }
 
     class GenericNode{
@@ -104,4 +135,5 @@ classDiagram
     Week o-- Hill
     Calculate o-- Week
     GenericQ o-- GenericNode
-
+    GenericLL o-- GenericNode
+    Site o-- GenericLL
