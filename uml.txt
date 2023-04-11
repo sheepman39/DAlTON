@@ -1,12 +1,16 @@
 classDiagram
 
-    class Calculate{
-        - sessions[]
+    class Main{
+        - weeksLL
+
+        + Main()
 
         + load()
         + save()
 
-        + editWeek()
+        + menu()
+
+        
 
         + calculateWeeks(Week, Week)
         + calculateHills(Hill, Hill)
@@ -16,22 +20,30 @@ classDiagram
         - Pioneer
         - Wildernes
 
-        + getChecaugau()
-        + getPioneer()
-        + getWilderness()
+        - weekNum
         
-        + editChecaugau()
-        + editPioneer()
-        + editWilderness()
+        + Week()
+
+        + menu()
+
+        
     }
     class Hill{
-        - siteQ
-        
-        + getSites()
-        + getTotalCots()
-        + getTotalTents()
+        - siteLL        
 
-        + editSites()
+        + getSites(): siteLL
+        + getCots(): int
+        + getTents() int
+
+        + menu()
+
+        + siteSelect() int
+
+        + printAllInfo()
+        + printHillInfo()
+
+        + addSite(int)
+        + deleteSite(int)
     }
 
     class Site {
@@ -43,7 +55,7 @@ classDiagram
 
         + menu()
         + printAllInfo()
-        + unitSelect()
+        + unitSelect() int
         
         + getCots(): int
         + getTents(): int
@@ -133,7 +145,8 @@ classDiagram
     Site o-- Unit
     Hill o-- Site
     Week o-- Hill
-    Calculate o-- Week
+    Main o-- Week
     GenericQ o-- GenericNode
     GenericLL o-- GenericNode
     Site o-- GenericLL
+    Hill o-- GenericLL
