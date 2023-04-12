@@ -1,67 +1,21 @@
-// Site.java
+// Hill.java
 import java.util.*;
 
-public class Site implements Basic{
-    
-    // we will use a linked list for the units
-    GenericLL <Unit> unitLL = new GenericLL<Unit>();
+public class Hill implements Basic{
 
-    // site number
-    int siteNum;
+    // site linked list will be used to store all of the sites in the hill
+    GenericLL <Site> siteLL = new GenericLL<Site>();
 
     public static void main(String[] args){
 
-        Site testSite = new Site();
+        // test harness
+        Hill testHill = new Hill();
 
-        testSite.menu();
-
-
+        testHill.menu();
     } // end main
 
-    public Site(){
-        
-        // set the siteNum to -1 initially
-        this.siteNum = -1;
-
+    public Hill(){
     } // end constructor
-
-    public Site(int siteNum){
-        
-        // constructor with the site num provided
-        this.siteNum = siteNum;
-        
-    } // end constructor
-
-    public void addUnit(){
-
-        // create a unit
-        Unit tempUnit = new Unit();
-
-        // append that unit to the queue
-        this.unitLL.append(tempUnit);
-
-    } // end addUnit
-    
-    public void deleteUnit(int i){
-
-        // delete the unit at the given index
-        this.unitLL.delete(i);
-        
-    } // end deleteUnit
-    
-    public void setSiteNum(int siteNum){
-
-        // set the siteNum to the num provided
-        this.siteNum = siteNum;
-
-    } // end setSiteNum
-
-    public int getSiteNum(){
-
-        // return the site num
-        return this.siteNum;
-
-    } // end getSiteNum
 
     public int getCots(){
 
@@ -70,15 +24,15 @@ public class Site implements Basic{
         
         // use a better way to traverse over the linked list
         // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
+        GenericNode <Site> currentNode = this.siteLL.getNode(0);
 
         while(currentNode != null){
             
             // get the data stored in the current node
-            Unit tempUnit = currentNode.getData();
+            Site tempSite = currentNode.getData();
 
             // increment cotNum by the number of cots in the data
-            cotNum += tempUnit.getCots();
+            cotNum += tempSite.getCots();
             
             // get the next node
             currentNode = currentNode.getNext();
@@ -95,15 +49,15 @@ public class Site implements Basic{
         int tentNum = 0;
 
         // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
+        GenericNode <Site> currentNode = this.siteLL.getNode(0);
 
         while(currentNode != null){
             
             // get the data stored in the current node
-            Unit tempUnit = currentNode.getData();
+            Site tempSite = currentNode.getData();
 
             // increment tentNum by the number of tents in the data
-            tentNum += tempUnit.getTents();
+            tentNum += tempSite.getTents();
             
             // get the next node
             currentNode = currentNode.getNext();
@@ -113,6 +67,70 @@ public class Site implements Basic{
         // return tentNum
         return tentNum;
     } // end getCots
+
+    public void addSite(){
+
+        // prompt the user for what the new site number should be
+        int siteNum = Unit.integerInput("What should the new site number be?");
+
+        // create a site
+        Site tempSite = new Site(siteNum);
+
+        // append the site to the end of the list
+        this.siteLL.append(tempSite);
+
+    } // end addSite
+
+    public void addSite(int siteNum){
+
+        // creatte a site
+        Site tempSite = new Site(siteNum);
+
+        // append the site to the end of the list
+        this.siteLL.append(tempSite);
+
+    } // end addSite
+
+    public void deleteSite(int siteLoc){
+
+        // delete the site at the given location
+        this.siteLL.delete(siteLoc);
+
+    } // end deleteSite
+
+    public void printHillInfo(){
+
+        // print the information about this hill
+        System.out.println("Information about this hill: ");
+        System.out.println("This hill has " + this.siteLL.length() + " sites");
+        System.out.println("Cots needed: " + this.getCots());
+        System.out.println("Tents needed: " + this.getTents());
+
+    } // end printHillInfo()
+    
+    public void printAllInfo(){
+
+        // print out the hill info
+        this.printHillInfo();
+
+        // print out each site info
+        GenericNode <Site> currentNode = this.siteLL.getNode(0);
+        
+        // iterate through each of the sites
+        while(currentNode != null){
+
+            // temp site
+            Site tempSite = currentNode.getData();
+
+            // print the sites data
+            System.out.println();
+            tempSite.printAllInfo();
+
+            // set the next node
+            currentNode = currentNode.getNext();
+
+        } // end while loop
+    } // end printAllInfo
 
     public void menu(){
 
@@ -130,13 +148,13 @@ public class Site implements Basic{
 
             // options
             System.out.println();
-            System.out.println("Menu for site #" + this.getSiteNum());
+            System.out.println("Menu for the hill");
             System.out.println("0) Quit");
-            System.out.println("1) Change site num");
-            System.out.println("2) See all site info");
-            System.out.println("3) Add a unit");
-            System.out.println("4) Edit a unit");
-            System.out.println("5) Delete a unit");
+            System.out.println("1) See some hill info");
+            System.out.println("2) See all hill info");
+            System.out.println("3) Add a site");
+            System.out.println("4) Edit a site");
+            System.out.println("5) Delete a site");
 
             // store the response in response
             String response = input.nextLine();
@@ -152,12 +170,8 @@ public class Site implements Basic{
 
             } else if(response.equals("1")){
 
-                // change the unit number
-                int num = Unit.integerInput("What would you like the new number to be?: ");
-                this.setSiteNum(num);
-
-                // confirmation message
-                System.out.println("Ok the site number is now " + this.getSiteNum());
+                // see some hill info
+                this.printHillInfo();
 
             } else if(response.equals("2")){
                 
@@ -166,43 +180,44 @@ public class Site implements Basic{
 
             } else if(response.equals("3")){
 
-                // add a unit
-                this.addUnit();
+                // add a site
+                this.addSite();
 
             } else if(response.equals("4")){
                 
                 // message to edit
-                System.out.println("Please select a unit to edit");
+                System.out.println("Please select a site to edit");
 
                 // run a sub-menu to select which unit to edit
-                int unitIndex = this.unitSelect();
+                int siteLoc = this.siteSelect();
 
                 // check if the response is greater than or equal to 0, meaning the user selected a valid response
-                if(unitIndex >= 0){
+                if(siteLoc >= 0){
 
                     // get the unit and run the menu
-                    this.unitLL.get(unitIndex).menu();
+                    this.siteLL.get(siteLoc).menu();
                 
                 } // end if
             } else if(response.equals("5")){
                 
                 // message to edit
-                System.out.println("Please select a unit to DELETE");
+                System.out.println("Please select a site to DELETE");
 
                 // delete a unit
-                int unitIndex = this.unitSelect();
+                int siteLoc = this.siteSelect();
 
                 // check if the response is valid
-                if(unitIndex >= 0){
+                if(siteLoc >= 0){
                     
                     // get the unit and delete it
-                    this.deleteUnit(unitIndex);
+                    this.deleteSite(siteLoc);
                 
                 } else {
                 
                     System.out.println("Invalid unit. Nothing was deleted");
                 
                 }// end if
+
             } else {
 
                 // error message
@@ -212,33 +227,7 @@ public class Site implements Basic{
         } // end while
     } // end menu
 
-    public void printAllInfo(){
-
-        // print out the sites information
-        System.out.println("Information about Site #" + this.getSiteNum());
-        System.out.println("Total number of cots: " + this.getCots());
-        System.out.println("Total number of tents: " + this.getTents());
-        
-        // print out information from each unit staying
-        // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
-
-        while(currentNode != null){
-            
-            // get the data stored in the current node
-            Unit tempUnit = currentNode.getData();
-
-            // increment tentNum by the number of tents in the data
-            System.out.println();
-            tempUnit.printAllInfo();
-            
-            // get the next node
-            currentNode = currentNode.getNext();
-
-        } // end while loop
-    } // end printAllInfo
-
-    public int unitSelect(){
+    public int siteSelect(){
 
         // sentry variable
         boolean keepGoing = true;
@@ -254,22 +243,22 @@ public class Site implements Basic{
         
             // output all of the options for the units
             System.out.println("");
-            System.out.println("Please select a unit");
+            System.out.println("Please select a site");
 
             // display a quit message
-            System.out.println("0) Quit and return to the site menu");
+            System.out.println("0) Quit and return to the hill menu");
 
             // get the first node in the list
-            GenericNode <Unit> currentNode = unitLL.getNode(0);
+            GenericNode <Site> currentNode = siteLL.getNode(0);
             
             // counter will tell the user which option to select to edit a given unit
             int counter = 1;
             while(currentNode != null){
                 
                 // get the data from the unit
-                Unit tempUnit = currentNode.getData();
+                Site tempSite = currentNode.getData();
 
-                System.out.println(counter + ") Select " + tempUnit.getUnitNum());
+                System.out.println(counter + ") Select " + tempSite.getSiteNum());
             
                 // increment counter
                 counter++;
@@ -301,7 +290,7 @@ public class Site implements Basic{
                     keepGoing = false;
                 
                 // note: offset response by -1 since quit is 0
-                } else if(response - 1 < this.unitLL.length()){
+                } else if(response - 1 < this.siteLL.length()){
 
                     if(response > 0){
                         
@@ -349,3 +338,5 @@ public class Site implements Basic{
         return returnValue;
     } // end unitMenu
 } // end site
+    
+

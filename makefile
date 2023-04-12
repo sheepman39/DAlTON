@@ -1,7 +1,9 @@
-Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class
+Hill.class: Hill.java Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Basic.class
+	javac -g Hill.java
+Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class Basic.class
 	javac -g Site.java
 
-Unit.class: Unit.java
+Unit.class: Unit.java Basic.class
 	javac -g Unit.java
 
 GenericLL.class: GenericLL.java GenericNode.class
@@ -13,12 +15,15 @@ GenericQ.class: GenericQ.java GenericNode.class
 GenericNode.class: GenericNode.java
 	javac -g GenericNode.java
 
+Basic.class: Basic.java
+	javac -g Basic.java
 
-run: Site.class
-	java Site
+
+run: Hill.class
+	java Hill
 
 clean:
 	rm *.class *.jar
 
-debug: Site.class
-	jdb Site
+debug: Hill.class
+	jdb Hill

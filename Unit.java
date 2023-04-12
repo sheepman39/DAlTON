@@ -2,7 +2,7 @@
 import java.math.*;
 import java.util.*;
 
-public class Unit{
+public class Unit implements Basic{
     
     // attributes to describe each unit
     int unitNum;
