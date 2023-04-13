@@ -1,10 +1,11 @@
 // Site.java
 import java.util.*;
+import java.io.*;
 
-public class Site implements Basic{
+public class Site extends Collection<Unit> implements Serializable, Basic{
     
     // we will use a linked list for the units
-    GenericLL <Unit> unitLL = new GenericLL<Unit>();
+    //GenericLL <Unit> dataLL = new GenericLL<Unit>();
 
     // site number
     int siteNum;
@@ -32,20 +33,20 @@ public class Site implements Basic{
         
     } // end constructor
 
-    public void addUnit(){
+    public void addItem(){
 
         // create a unit
         Unit tempUnit = new Unit();
 
         // append that unit to the queue
-        this.unitLL.append(tempUnit);
+        this.dataLL.append(tempUnit);
 
     } // end addUnit
     
     public void deleteUnit(int i){
 
         // delete the unit at the given index
-        this.unitLL.delete(i);
+        this.dataLL.delete(i);
         
     } // end deleteUnit
     
@@ -62,57 +63,6 @@ public class Site implements Basic{
         return this.siteNum;
 
     } // end getSiteNum
-
-    public int getCots(){
-
-        // use a for loop to get the number of cots from each unit in the queue
-        int cotNum = 0;
-        
-        // use a better way to traverse over the linked list
-        // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
-
-        while(currentNode != null){
-            
-            // get the data stored in the current node
-            Unit tempUnit = currentNode.getData();
-
-            // increment cotNum by the number of cots in the data
-            cotNum += tempUnit.getCots();
-            
-            // get the next node
-            currentNode = currentNode.getNext();
-
-        } // end while loop
-
-        // return cotNum
-        return cotNum;
-    } // end getCots
-
-    public int getTents(){
-
-        // use a for loop to get the number of cots from each unit in the queue
-        int tentNum = 0;
-
-        // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
-
-        while(currentNode != null){
-            
-            // get the data stored in the current node
-            Unit tempUnit = currentNode.getData();
-
-            // increment tentNum by the number of tents in the data
-            tentNum += tempUnit.getTents();
-            
-            // get the next node
-            currentNode = currentNode.getNext();
-
-        } // end while loop
-
-        // return tentNum
-        return tentNum;
-    } // end getCots
 
     public void menu(){
 
@@ -167,7 +117,7 @@ public class Site implements Basic{
             } else if(response.equals("3")){
 
                 // add a unit
-                this.addUnit();
+                this.addItem();
 
             } else if(response.equals("4")){
                 
@@ -175,13 +125,13 @@ public class Site implements Basic{
                 System.out.println("Please select a unit to edit");
 
                 // run a sub-menu to select which unit to edit
-                int unitIndex = this.unitSelect();
+                int unitIndex = this.itemSelect();
 
                 // check if the response is greater than or equal to 0, meaning the user selected a valid response
                 if(unitIndex >= 0){
 
                     // get the unit and run the menu
-                    this.unitLL.get(unitIndex).menu();
+                    this.dataLL.get(unitIndex).menu();
                 
                 } // end if
             } else if(response.equals("5")){
@@ -190,7 +140,7 @@ public class Site implements Basic{
                 System.out.println("Please select a unit to DELETE");
 
                 // delete a unit
-                int unitIndex = this.unitSelect();
+                int unitIndex = this.itemSelect();
 
                 // check if the response is valid
                 if(unitIndex >= 0){
@@ -221,7 +171,7 @@ public class Site implements Basic{
         
         // print out information from each unit staying
         // get the first node and set it to currentNode
-        GenericNode <Unit> currentNode = this.unitLL.getNode(0);
+        GenericNode <Unit> currentNode = this.dataLL.getNode(0);
 
         while(currentNode != null){
             
@@ -237,115 +187,4 @@ public class Site implements Basic{
 
         } // end while loop
     } // end printAllInfo
-
-    public int unitSelect(){
-
-        // sentry variable
-        boolean keepGoing = true;
-
-        // set the default return value to -1 (invalid)
-        int returnValue = -1;
-
-        // while loop to control user input
-        while(keepGoing){
-
-            // create the new scanner for input
-            Scanner input = new Scanner(System.in);
-        
-            // output all of the options for the units
-            System.out.println("");
-            System.out.println("Please select a unit");
-
-            // display a quit message
-            System.out.println("0) Quit and return to the site menu");
-
-            // get the first node in the list
-            GenericNode <Unit> currentNode = unitLL.getNode(0);
-            
-            // counter will tell the user which option to select to edit a given unit
-            int counter = 1;
-            while(currentNode != null){
-                
-                // get the data from the unit
-                Unit tempUnit = currentNode.getData();
-
-                System.out.println(counter + ") Select " + tempUnit.getUnitNum());
-            
-                // increment counter
-                counter++;
-
-                // get the next node
-                currentNode = currentNode.getNext();
-           
-            } // end while loop
-           
-            // spacer
-            System.out.println("");
-            
-            // define response
-            Integer response;
-
-            // since we have to turn the user's response into an int to use in the unit list, we will run the following code
-            try{
-
-                // set keepGoing to false
-                keepGoing = false;
-
-                // attempt to put the input in response
-                response = input.nextInt();
-                
-                // check if the response is the same as the size of the dogs list
-                if(response.equals(0)){
-                
-                    // quit
-                    keepGoing = false;
-                
-                // note: offset response by -1 since quit is 0
-                } else if(response - 1 < this.unitLL.length()){
-
-                    if(response > 0){
-                        
-                        // if it is a valid index, run the menu of that unit
-                        // note that it is -1 since we added 1 in the menu
-                        returnValue = (response - 1);
-                
-                    } else {
-
-                        // keep prompting the user for valid input
-                        System.out.println("Please input a valid number greater than 0");
-                        keepGoing = true; 
-                    
-                    } // end inner if/else
-                
-                } else {
-
-                    // keep prompting the user for valid input
-                    System.out.println("Please input a valid number");
-                    keepGoing = true;
-                
-                } // end if/else
-                
-            } catch(NumberFormatException e){
-
-                // this exception means that an invalid answer was put in so we will clarify for the user
-                System.out.println("Please input a valid number");
-
-                // reset keepGoing
-                keepGoing = true;
-
-            } catch(Exception e){
-
-                // if this happens we aren't sure what the error is
-                System.out.println("Unexpected error. Please input a valid number.");
-                System.out.println(e.getMessage());
-
-                // reset keepGoing
-                keepGoing = true;
-            
-            } // end try/catch blocks
-        } // end while loop 
-
-        // return the value
-        return returnValue;
-    } // end unitMenu
 } // end site

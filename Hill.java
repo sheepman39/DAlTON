@@ -1,10 +1,11 @@
 // Hill.java
 import java.util.*;
+import java.io.*;
 
-public class Hill implements Basic{
+public class Hill extends Collection<Site> implements Serializable, Basic{
 
     // site linked list will be used to store all of the sites in the hill
-    GenericLL <Site> siteLL = new GenericLL<Site>();
+    GenericLL <Site> dataLL = new GenericLL<Site>();
 
     public static void main(String[] args){
 
@@ -17,58 +18,7 @@ public class Hill implements Basic{
     public Hill(){
     } // end constructor
 
-    public int getCots(){
-
-        // use a for loop to get the number of cots from each unit in the queue
-        int cotNum = 0;
-        
-        // use a better way to traverse over the linked list
-        // get the first node and set it to currentNode
-        GenericNode <Site> currentNode = this.siteLL.getNode(0);
-
-        while(currentNode != null){
-            
-            // get the data stored in the current node
-            Site tempSite = currentNode.getData();
-
-            // increment cotNum by the number of cots in the data
-            cotNum += tempSite.getCots();
-            
-            // get the next node
-            currentNode = currentNode.getNext();
-
-        } // end while loop
-
-        // return cotNum
-        return cotNum;
-    } // end getCots
-
-    public int getTents(){
-
-        // use a for loop to get the number of cots from each unit in the queue
-        int tentNum = 0;
-
-        // get the first node and set it to currentNode
-        GenericNode <Site> currentNode = this.siteLL.getNode(0);
-
-        while(currentNode != null){
-            
-            // get the data stored in the current node
-            Site tempSite = currentNode.getData();
-
-            // increment tentNum by the number of tents in the data
-            tentNum += tempSite.getTents();
-            
-            // get the next node
-            currentNode = currentNode.getNext();
-
-        } // end while loop
-
-        // return tentNum
-        return tentNum;
-    } // end getCots
-
-    public void addSite(){
+    public void addItem(){
 
         // prompt the user for what the new site number should be
         int siteNum = Unit.integerInput("What should the new site number be?");
@@ -77,24 +27,24 @@ public class Hill implements Basic{
         Site tempSite = new Site(siteNum);
 
         // append the site to the end of the list
-        this.siteLL.append(tempSite);
+        this.dataLL.append(tempSite);
 
     } // end addSite
 
-    public void addSite(int siteNum){
+    public void addItem(int siteNum){
 
         // creatte a site
         Site tempSite = new Site(siteNum);
 
         // append the site to the end of the list
-        this.siteLL.append(tempSite);
+        this.dataLL.append(tempSite);
 
     } // end addSite
 
     public void deleteSite(int siteLoc){
 
         // delete the site at the given location
-        this.siteLL.delete(siteLoc);
+        this.dataLL.delete(siteLoc);
 
     } // end deleteSite
 
@@ -102,7 +52,7 @@ public class Hill implements Basic{
 
         // print the information about this hill
         System.out.println("Information about this hill: ");
-        System.out.println("This hill has " + this.siteLL.length() + " sites");
+        System.out.println("This hill has " + this.dataLL.length() + " sites");
         System.out.println("Cots needed: " + this.getCots());
         System.out.println("Tents needed: " + this.getTents());
 
@@ -114,7 +64,7 @@ public class Hill implements Basic{
         this.printHillInfo();
 
         // print out each site info
-        GenericNode <Site> currentNode = this.siteLL.getNode(0);
+        GenericNode <Site> currentNode = this.dataLL.getNode(0);
         
         // iterate through each of the sites
         while(currentNode != null){
@@ -181,7 +131,7 @@ public class Hill implements Basic{
             } else if(response.equals("3")){
 
                 // add a site
-                this.addSite();
+                this.addItem();
 
             } else if(response.equals("4")){
                 
@@ -195,7 +145,7 @@ public class Hill implements Basic{
                 if(siteLoc >= 0){
 
                     // get the unit and run the menu
-                    this.siteLL.get(siteLoc).menu();
+                    this.dataLL.get(siteLoc).menu();
                 
                 } // end if
             } else if(response.equals("5")){
@@ -249,7 +199,7 @@ public class Hill implements Basic{
             System.out.println("0) Quit and return to the hill menu");
 
             // get the first node in the list
-            GenericNode <Site> currentNode = siteLL.getNode(0);
+            GenericNode <Site> currentNode = dataLL.getNode(0);
             
             // counter will tell the user which option to select to edit a given unit
             int counter = 1;
@@ -290,7 +240,7 @@ public class Hill implements Basic{
                     keepGoing = false;
                 
                 // note: offset response by -1 since quit is 0
-                } else if(response - 1 < this.siteLL.length()){
+                } else if(response - 1 < this.dataLL.length()){
 
                     if(response > 0){
                         
