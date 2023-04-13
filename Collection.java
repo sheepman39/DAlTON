@@ -6,10 +6,18 @@ public abstract class Collection <Type extends Basic> implements Serializable {
 
     // common functions
     GenericLL<Type> dataLL = new GenericLL<Type>();
-    
+    int id;
+
     public abstract void menu();
     public abstract void printAllInfo();
     public abstract void addItem();
+    
+    public void deleteItem(int loc){
+
+        // delete the item at the location in the ll
+        this.dataLL.delete(loc);
+
+    } // end deleteItem
    
     public int getCots(){
 
@@ -95,7 +103,7 @@ public abstract class Collection <Type extends Basic> implements Serializable {
                 // get the data from the unit
                 Type tempType = currentNode.getData();
 
-                System.out.println(counter + ") Select ");
+                System.out.println(counter + ") Select " + tempType.getID());
 
                 // note - after rewrite, readd tempType.getID()
             

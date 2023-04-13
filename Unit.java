@@ -5,7 +5,7 @@ import java.util.*;
 public class Unit implements Basic{
     
     // attributes to describe each unit
-    int unitNum;
+    int id;
     int youthM;
     int youthF;
     int adultM;
@@ -22,7 +22,7 @@ public class Unit implements Basic{
 
     public Unit(){
 
-        this.unitNum = integerInput("What is your unit number?");
+        this.id = integerInput("What is your unit number?");
         this.youthM = integerInput("How many youth (m) do you have?");
         this.youthF = integerInput("How many youth (f) do you have?");
         this.adultM = integerInput("How many adults (m) do you have?");
@@ -167,17 +167,17 @@ public class Unit implements Basic{
 
     }// end setAdultF   
 
-    public int getUnitNum(){
+    public int getID(){
 
         // return the unit number
-        return this.unitNum;
+        return this.id;
 
     } // end getUnitNum
 
-    public void setUnitNum(int num){
+    public void setID(int num){
 
         // set the unit number
-        this.unitNum = num;
+        this.id = num;
 
     } // end setUnitNum
 
@@ -211,7 +211,7 @@ public class Unit implements Basic{
 
             // options
             System.out.println();
-            System.out.println("Menu for unit #" + this.getUnitNum());
+            System.out.println("Menu for unit #" + this.getID());
             System.out.println("0) Quit");
             System.out.println("1) Change unit num");
             System.out.println("2) Change the number of members");
@@ -235,10 +235,10 @@ public class Unit implements Basic{
 
                 // change the unit number
                 int num = integerInput("What would you like the new number to be?: ");
-                this.setUnitNum(num);
+                this.setID(num);
 
                 // confirmation message
-                System.out.println("Ok your unit number is now " + this.getUnitNum());
+                System.out.println("Ok your unit number is now " + this.getID());
 
             } else if(response.equals("2")){
                 
@@ -285,7 +285,7 @@ public class Unit implements Basic{
     public void printAllInfo(){
         
         // print out the current information for the troop
-        System.out.println("Information about Unit #" + this.getUnitNum());
+        System.out.println("Information about Unit #" + this.getID());
         System.out.println("Total Cots needed: " + this.getCots());
         System.out.println("Total Tents needed: " + this.getTents());
         System.out.println("Extra requested cots: " + this.extraCots);

@@ -18,6 +18,20 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
     public Hill(){
     } // end constructor
 
+    public int getID(){
+
+        // returnt the id
+        return this.id;
+
+    } // end getID
+
+    public void setID(int num){
+    
+        // set the id to the provided option 
+        this.id = num;
+
+    } // end setID
+
     public void addItem(){
 
         // prompt the user for what the new site number should be
@@ -40,13 +54,6 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         this.dataLL.append(tempSite);
 
     } // end addSite
-
-    public void deleteSite(int siteLoc){
-
-        // delete the site at the given location
-        this.dataLL.delete(siteLoc);
-
-    } // end deleteSite
 
     public void printHillInfo(){
 
@@ -139,7 +146,7 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
                 System.out.println("Please select a site to edit");
 
                 // run a sub-menu to select which unit to edit
-                int siteLoc = this.siteSelect();
+                int siteLoc = this.itemSelect();
 
                 // check if the response is greater than or equal to 0, meaning the user selected a valid response
                 if(siteLoc >= 0){
@@ -154,13 +161,13 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
                 System.out.println("Please select a site to DELETE");
 
                 // delete a unit
-                int siteLoc = this.siteSelect();
+                int siteLoc = this.itemSelect();
 
                 // check if the response is valid
                 if(siteLoc >= 0){
                     
                     // get the unit and delete it
-                    this.deleteSite(siteLoc);
+                    this.deleteItem(siteLoc);
                 
                 } else {
                 
@@ -176,117 +183,6 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
             } // end if/else block
         } // end while
     } // end menu
-
-    public int siteSelect(){
-
-        // sentry variable
-        boolean keepGoing = true;
-
-        // set the default return value to -1 (invalid)
-        int returnValue = -1;
-
-        // while loop to control user input
-        while(keepGoing){
-
-            // create the new scanner for input
-            Scanner input = new Scanner(System.in);
-        
-            // output all of the options for the units
-            System.out.println("");
-            System.out.println("Please select a site");
-
-            // display a quit message
-            System.out.println("0) Quit and return to the hill menu");
-
-            // get the first node in the list
-            GenericNode <Site> currentNode = dataLL.getNode(0);
-            
-            // counter will tell the user which option to select to edit a given unit
-            int counter = 1;
-            while(currentNode != null){
-                
-                // get the data from the unit
-                Site tempSite = currentNode.getData();
-
-                System.out.println(counter + ") Select " + tempSite.getSiteNum());
-            
-                // increment counter
-                counter++;
-
-                // get the next node
-                currentNode = currentNode.getNext();
-           
-            } // end while loop
-           
-            // spacer
-            System.out.println("");
-            
-            // define response
-            Integer response;
-
-            // since we have to turn the user's response into an int to use in the unit list, we will run the following code
-            try{
-
-                // set keepGoing to false
-                keepGoing = false;
-
-                // attempt to put the input in response
-                response = input.nextInt();
-                
-                // check if the response is the same as the size of the dogs list
-                if(response.equals(0)){
-                
-                    // quit
-                    keepGoing = false;
-                
-                // note: offset response by -1 since quit is 0
-                } else if(response - 1 < this.dataLL.length()){
-
-                    if(response > 0){
-                        
-                        // if it is a valid index, run the menu of that unit
-                        // note that it is -1 since we added 1 in the menu
-                        returnValue = (response - 1);
-                
-                    } else {
-
-                        // keep prompting the user for valid input
-                        System.out.println("Please input a valid number greater than 0");
-                        keepGoing = true; 
-                    
-                    } // end inner if/else
-                
-                } else {
-
-                    // keep prompting the user for valid input
-                    System.out.println("Please input a valid number");
-                    keepGoing = true;
-                
-                } // end if/else
-                
-            } catch(NumberFormatException e){
-
-                // this exception means that an invalid answer was put in so we will clarify for the user
-                System.out.println("Please input a valid number");
-
-                // reset keepGoing
-                keepGoing = true;
-
-            } catch(Exception e){
-
-                // if this happens we aren't sure what the error is
-                System.out.println("Unexpected error. Please input a valid number.");
-                System.out.println(e.getMessage());
-
-                // reset keepGoing
-                keepGoing = true;
-            
-            } // end try/catch blocks
-        } // end while loop 
-
-        // return the value
-        return returnValue;
-    } // end unitMenu
 } // end site
     
 

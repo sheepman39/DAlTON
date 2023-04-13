@@ -1,9 +1,9 @@
-Hill.class: Hill.java Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Basic.class
+Hill.class: Hill.java Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Hill.java
-Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class Basic.class
+Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Site.java
 
-Unit.class: Unit.java Basic.class
+Unit.class: Unit.java Collection.class Basic.class
 	javac -g Unit.java
 
 GenericLL.class: GenericLL.java GenericNode.class
@@ -15,9 +15,11 @@ GenericQ.class: GenericQ.java GenericNode.class
 GenericNode.class: GenericNode.java
 	javac -g GenericNode.java
 
+Collection.class: Collection.java Basic.class
+	javac -g Collection.java
+
 Basic.class: Basic.java
 	javac -g Basic.java
-
 
 run: Hill.class
 	java Hill

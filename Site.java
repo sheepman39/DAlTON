@@ -8,7 +8,7 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
     //GenericLL <Unit> dataLL = new GenericLL<Unit>();
 
     // site number
-    int siteNum;
+    int id;
 
     public static void main(String[] args){
 
@@ -21,15 +21,15 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
 
     public Site(){
         
-        // set the siteNum to -1 initially
-        this.siteNum = -1;
+        // set the id to -1 initially
+        this.id = -1;
 
     } // end constructor
 
-    public Site(int siteNum){
+    public Site(int id){
         
         // constructor with the site num provided
-        this.siteNum = siteNum;
+        this.id = id;
         
     } // end constructor
 
@@ -43,24 +43,17 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
 
     } // end addUnit
     
-    public void deleteUnit(int i){
+    public void setID(int id){
 
-        // delete the unit at the given index
-        this.dataLL.delete(i);
-        
-    } // end deleteUnit
-    
-    public void setSiteNum(int siteNum){
-
-        // set the siteNum to the num provided
-        this.siteNum = siteNum;
+        // set the id to the num provided
+        this.id = id;
 
     } // end setSiteNum
 
-    public int getSiteNum(){
+    public int getID(){
 
         // return the site num
-        return this.siteNum;
+        return this.id;
 
     } // end getSiteNum
 
@@ -80,7 +73,7 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
 
             // options
             System.out.println();
-            System.out.println("Menu for site #" + this.getSiteNum());
+            System.out.println("Menu for site #" + this.getID());
             System.out.println("0) Quit");
             System.out.println("1) Change site num");
             System.out.println("2) See all site info");
@@ -104,10 +97,10 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
 
                 // change the unit number
                 int num = Unit.integerInput("What would you like the new number to be?: ");
-                this.setSiteNum(num);
+                this.setID(num);
 
                 // confirmation message
-                System.out.println("Ok the site number is now " + this.getSiteNum());
+                System.out.println("Ok the site number is now " + this.getID());
 
             } else if(response.equals("2")){
                 
@@ -146,7 +139,7 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
                 if(unitIndex >= 0){
                     
                     // get the unit and delete it
-                    this.deleteUnit(unitIndex);
+                    this.deleteItem(unitIndex);
                 
                 } else {
                 
@@ -165,7 +158,7 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
     public void printAllInfo(){
 
         // print out the sites information
-        System.out.println("Information about Site #" + this.getSiteNum());
+        System.out.println("Information about Site #" + this.getID());
         System.out.println("Total number of cots: " + this.getCots());
         System.out.println("Total number of tents: " + this.getTents());
         
