@@ -18,6 +18,10 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
     public Hill(){
     } // end constructor
 
+    public Hill(int id){
+        this.id = id;
+    } // end Hill
+
     public int getID(){
 
         // returnt the id

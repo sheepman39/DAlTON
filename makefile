@@ -1,3 +1,6 @@
+Week.class: Week.java Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
+	javac -g Week.java
+
 Hill.class: Hill.java Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Hill.java
 Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
@@ -21,11 +24,11 @@ Collection.class: Collection.java Basic.class
 Basic.class: Basic.java
 	javac -g Basic.java
 
-run: Hill.class
-	java Hill
+run: Week.class
+	java Week
 
 clean:
 	rm *.class *.jar
 
-debug: Hill.class
-	jdb Hill
+debug: Week.class
+	jdb Week
