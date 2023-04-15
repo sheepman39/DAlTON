@@ -94,7 +94,7 @@ public abstract class Collection <Type extends Basic> implements Serializable {
             System.out.println("0) Quit and return to the menu");
 
             // get the first node in the list
-            GenericNode <Type> currentNode = dataLL.getNode(0);
+            GenericNode <Type> currentNode = this.dataLL.getNode(0);
             
             // counter will tell the user which option to select to edit a given unit
             int counter = 1;

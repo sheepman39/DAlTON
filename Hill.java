@@ -4,9 +4,6 @@ import java.io.*;
 
 public class Hill extends Collection<Site> implements Serializable, Basic{
 
-    // site linked list will be used to store all of the sites in the hill
-    GenericLL <Site> dataLL = new GenericLL<Site>();
-
     public static void main(String[] args){
 
         // test harness
@@ -109,13 +106,11 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
             // options
             System.out.println();
-            System.out.println("Menu for the hill");
+            System.out.println("Menu for hill #" + this.id);
             System.out.println("0) Quit");
             System.out.println("1) See some hill info");
             System.out.println("2) See all hill info");
-            System.out.println("3) Add a site");
-            System.out.println("4) Edit a site");
-            System.out.println("5) Delete a site");
+            System.out.println("3) Edit a site");
 
             // store the response in response
             String response = input.nextLine();
@@ -140,11 +135,6 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
                 this.printAllInfo(); 
 
             } else if(response.equals("3")){
-
-                // add a site
-                this.addItem();
-
-            } else if(response.equals("4")){
                 
                 // message to edit
                 System.out.println("Please select a site to edit");
@@ -159,25 +149,6 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
                     this.dataLL.get(siteLoc).menu();
                 
                 } // end if
-            } else if(response.equals("5")){
-                
-                // message to edit
-                System.out.println("Please select a site to DELETE");
-
-                // delete a unit
-                int siteLoc = this.itemSelect();
-
-                // check if the response is valid
-                if(siteLoc >= 0){
-                    
-                    // get the unit and delete it
-                    this.deleteItem(siteLoc);
-                
-                } else {
-                
-                    System.out.println("Invalid unit. Nothing was deleted");
-                
-                }// end if
 
             } else {
 

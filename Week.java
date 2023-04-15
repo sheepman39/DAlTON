@@ -22,6 +22,31 @@ public class Week implements Basic, Serializable{
     } // end main
 
     public Week(){
+
+        // each hill has a certain number of sites assigned to them
+        // Wilderness: sites 1-8
+        // Checaugau: sites 9-15
+        // Pioneer: sites 16-21
+
+        // we will use a for loop to assign each hill the right number of sites
+        for(int i = 1; i <= 8; i++){
+            
+            wilderness.addItem(i);
+
+        } // end for loop
+
+        for(int i = 9; i <= 15; i++){
+
+            checaugau.addItem(i);
+
+        } // end for loop
+
+        for(int i = 16; i <= 21; i++){
+
+            pioneer.addItem(i);
+
+        } // end for loop
+
     } // end constructor
     
     public Hill getWild(){

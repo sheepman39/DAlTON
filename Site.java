@@ -4,9 +4,6 @@ import java.io.*;
 
 public class Site extends Collection<Unit> implements Serializable, Basic{
     
-    // we will use a linked list for the units
-    //GenericLL <Unit> dataLL = new GenericLL<Unit>();
-
     // site number
     int id;
 
