@@ -1,8 +1,16 @@
+
+Main.jar: Main.class Week.class Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
+	jar -cvfm Main.java manifest.txt *.*
+
+Main.class: Main.java Week.class Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
+	javac -g Main.java
+
 Week.class: Week.java Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Week.java
 
 Hill.class: Hill.java Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Hill.java
+
 Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	javac -g Site.java
 
@@ -24,11 +32,11 @@ Collection.class: Collection.java Basic.class
 Basic.class: Basic.java
 	javac -g Basic.java
 
-run: Week.class
-	java Week
+run: Main.jar
+	java -jar Main.jar
 
 clean:
 	rm *.class *.jar
 
-debug: Week.class
-	jdb Week
+debug: Main.jar
+	jdb Main.jar
