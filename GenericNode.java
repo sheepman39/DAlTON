@@ -1,6 +1,7 @@
 // GenericNode.java
+import java.io.*;
 
-public class GenericNode <NodeType>{
+public class GenericNode <NodeType> implements Serializable{
 
     // for max compatability, each node will have a previous and anext
     NodeType data;

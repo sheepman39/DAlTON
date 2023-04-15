@@ -1,8 +1,9 @@
 // Unit.java
 import java.math.*;
 import java.util.*;
+import java.io.*;
 
-public class Unit implements Basic{
+public class Unit implements Serializable, Basic{
     
     // attributes to describe each unit
     int id;

@@ -1,6 +1,7 @@
 // GenericLL.java
+import java.io.*;
 
-public class GenericLL <NodeType> {
+public class GenericLL <NodeType> extends Serializable {
 
     // mark that there should be a head and a tail here
     GenericNode <NodeType> head;
