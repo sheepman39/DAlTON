@@ -10,26 +10,36 @@ classDiagram
 
         + menu()
 
-        
-
         + calculateWeeks(Week, Week)
         + calculateHills(Hill, Hill)
     }
     class Week{
+        - id
         - Checaugau
         - Pioneer
         - Wildernes
-
-        - weekNum
         
         + Week()
 
+        + getCots() int 
+        + getTents() int 
+        + getID() int 
+        + setID(int) 
         + menu()
 
+        + getWild() Hill 
+        + getChec() Hill 
+        + getPio() Hill 
+
+        + getCots() int 
+        + getTents() int 
+        + itemSelect() int
+        + printAllInfo()
         
     }
     class Hill{
-        - siteLL        
+        - siteLL      
+        - id  
 
         + getSites(): siteLL
         + getCots(): int
@@ -47,8 +57,8 @@ classDiagram
     }
 
     class Site {
-        - unitLL
-        - siteNum: int 
+        - dataLL
+        - id 
 
         + Site()
         + Site(int)
@@ -57,18 +67,18 @@ classDiagram
         + printAllInfo()
         + unitSelect() int
         
-        + getCots(): int
-        + getTents(): int
+        + getCots() int
+        + getTents() int
 
         + addUnit()
         + deleteUnit()
 
-        + getSiteNum: int 
-        + setSiteNum(int)
+        + getID() int 
+        + setID(int)
     }
 
     class Unit{
-        - unitNum: int
+        - id: int
         - youthM: int
         - youthF: int
         - adultM: int
@@ -96,8 +106,8 @@ classDiagram
         + setAdultM(int)
         + setAdultF(int)
         
-        + getUnitNum() int 
-        + setUnitNum(int)
+        + getID() int 
+        + setID(int)
 
         + printAllInfo()
 
@@ -142,6 +152,26 @@ classDiagram
         + setPrevious(GenericNode)
     }
 
+    class Collection{
+        - dataLL 
+        - id
+        + getCots() int 
+        + getTents() int 
+        + menu()*
+        + itemSelect() int
+        + addItem()*
+        + deleteItem(int)
+        + printAllInfo()*
+    }
+    class Basic{
+        + getCots() int 
+        + getTents() int 
+        + getID() int 
+        + setID(int) 
+        + menu()
+    }
+    <<Interface>> Basic
+    <<Abstraction>> Collection
     Site o-- Unit
     Hill o-- Site
     Week o-- Hill
@@ -150,3 +180,10 @@ classDiagram
     GenericLL o-- GenericNode
     Site o-- GenericLL
     Hill o-- GenericLL
+
+    Unit <|-- Basic
+    Site <|-- Basic
+    Site <|-- Collection
+    Hill <|-- Basic
+    Hill <|-- Collection
+    Week <|-- Basic
