@@ -41,6 +41,44 @@ public class Main{
         this.weekList.remove(index);
 
     } // end deleteWeek
+    
+    public void printSomeInfo(){
+        
+        // print some basic information
+        System.out.println("Information for Camp Blackhawk (GO!): ");
+        System.out.println("We have " + this.weekList.size() + " weeks of camp");
+        
+        // use a for loop to print cots/tents needed for each week/hill
+        for(int i = 0; i < this.weekList.size(); i++){
+            
+            // get the current week
+            Week tempWeek = this.weekList.get(i);
+
+            // print out the week information
+            tempWeek.printWeekInfo();
+
+        } // end for loop
+    } // end print some info
+
+        
+    public void printAllInfo(){
+        
+        // print some basic information
+        System.out.println("Information for Camp Blackhawk (GO!): ");
+        System.out.println("We have " + this.weekList.size() + " weeks of camp");
+        
+        // use a for loop to print cots/tents needed for each week/hill
+        for(int i = 0; i < this.weekList.size(); i++){
+            
+            // get the current week
+            Week tempWeek = this.weekList.get(i);
+
+            // print out the week information
+            tempWeek.printAllInfo();
+
+        } // end for loop
+    } // end print some info
+
 
     public void menu(){
 
@@ -82,8 +120,13 @@ public class Main{
                 this.save();
             } else if(response.equals("1")){
 
+                // print some information
+                this.printSomeInfo();
 
             } else if(response.equals("2")){
+
+                // print all info
+                this.printAllInfo();
 
             } else if(response.equals("3")){
 
@@ -166,6 +209,7 @@ public class Main{
 
             // create a new dog to go in the dogs list
             Week newWeek = new Week();
+            newWeek.setID(1);
             this.weekList.add(newWeek);
 
         } catch(Exception e){
