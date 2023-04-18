@@ -1,4 +1,6 @@
 // Hill.java
+import java.util.*;
+import java.io.*;
 
 public class Hill extends Collection<Site> implements Serializable, Basic{
 
