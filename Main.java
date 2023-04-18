@@ -79,7 +79,54 @@ public class Main{
         } // end for loop
     } // end print some info
 
+    public void compareWeeks(Week week1, Week week2){
+        // goal: compare each hill, site ect
+        // compare wilderness
+        GenericLL<Site> chec1 = week1.getChec().getSites();
+        GenericLL<Site> chec2 = week2.getChec().getSites();
 
+        GenericLL<Site> wild1 = week1.getWild().getSites();
+        GenericLL<Site> wild2 = week2.getWild().getSites();
+
+        GenericLL<Site> pio1 = week1.getPio().getSites();
+        GenericLL<Site> pio2 = week2.getPio().getSites();
+
+        this.compareHills(wild1, wild2);
+        this.compareHills(chec1, chec2);
+        this.compareHills(pio1, pio2);
+
+    } // end compareWeeks
+
+    public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2){
+        
+        GenericNode<Site> currentNode1 = week1.getNode(0);
+        GenericNode<Site> currentNode2 = week2.getNode(0);
+        
+        int cotCounter = 0;
+        int tentCounter = 0;
+
+        while(currentNode1 != null){
+
+            Site site1 = currentNode1.getData();
+            Site site2 = currentNode2.getData();
+
+            int cotDiscrepancy = site2.getCots() - site1.getCots();
+            int tentDiscrepancy = site2.getTents() - site1.getTents();
+            
+            cotCounter += cotDiscrepancy;
+            tentCounter += tentDiscrepancy;
+
+            System.out.println("Information for site #" + site1.getID());
+            System.out.println("Tents neede: " + tentDiscrepancy);
+            System.out.println("Cots needed: " + cotDiscrepancy);
+            System.out.println();
+            currentNode1 = currentNode1.getNext();
+            currentNode2 = currentNode2.getNext();
+        } // end while loop
+
+        System.out.println("This hill needs " + tentCounter + " more tents");
+        System.out.println("This hill needs " + cotCounter + " more cots");
+    } // end compareHill
     public void menu(){
 
         // define sentry variable
@@ -103,6 +150,7 @@ public class Main{
             System.out.println("3) Add a week");
             System.out.println("4) Edit a week");
             System.out.println("5) Delete a week");
+            System.out.println("6) Compare weeks");
 
             // store the response in response
             String response = input.nextLine();
@@ -170,7 +218,27 @@ public class Main{
                     System.out.println("Invalid week. Nothing was deleted");
                 } // end inner if/else
 
-            } else {
+            } else if(response.equals("6")){
+                // delete a week
+                System.out.println("Please select the first week to select");
+                int firstIndex = this.weekSelect();
+
+                System.out.println("Please select the second week to compare");
+                int secondIndex = this.weekSelect();
+                
+                // check if the response was valid
+                if(firstIndex >= 0 && secondIndex >= 0){
+
+                    // get the week
+                    Week week1 = this.weekList.get(firstIndex);
+                    Week week2 = this.weekList.get(secondIndex);
+                    this.compareWeeks(week1, week2);
+                } else {
+
+                    System.out.println("Invalid week selected. Nothing was selected");
+
+                } // end inner if/else
+            } else { 
 
                 // error message
                 System.out.println("Please put in a valid option");

@@ -33,6 +33,9 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
     } // end setID
 
+    public GenericLL getSites(){
+        return this.dataLL;
+    } // end getSites
     public void addItem(){
 
         // prompt the user for what the new site number should be
