@@ -179,6 +179,7 @@ public class Main{
         } // end while
     } // end menu
 
+    @SuppressWarnings("unchecked")
     public void load(){
 
         // load up any data that already exists
@@ -221,6 +222,7 @@ public class Main{
         } // end try/catch
      } // end resetFile
 
+    @SuppressWarnings("unchecked")
     public void save(){
 
         // try to save any data that is in users
