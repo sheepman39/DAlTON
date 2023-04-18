@@ -1,6 +1,4 @@
 // Hill.java
-import java.util.*;
-import java.io.*;
 
 public class Hill extends Collection<Site> implements Serializable, Basic{
 
@@ -158,6 +156,6 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
             } // end if/else block
         } // end while
     } // end menu
-} // end site
+} // end Hill
     
 

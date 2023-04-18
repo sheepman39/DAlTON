@@ -4,6 +4,7 @@
 
 ### Unit
 Goal - hold all of the relevant information about a given unit in a site
+The Unit will implement the Basic interface.
 
 ### Unit.Unit() 
 Goal - Set the numbers for the unit
@@ -72,13 +73,11 @@ Steps - return adultM
 ### Unit.getAdultF(): int
 Goal - return adultF in a unit
 
-Input - none
-
 Output - An integer representing the number of adults
 
 Steps - return adultF
 
-### Unit.setUnitNum(int num)
+### Unit.setID(int num)
 Goal - set the unit number
 
 Input - an integer representing the new unit number
@@ -86,6 +85,15 @@ Input - an integer representing the new unit number
 Output - none
 
 Steps - set the unitNum to the provided num
+
+### Unit.getID(): int
+Goal - get the unit number
+
+Input - none
+
+Output - integer representing the id of the unit
+
+Steps - return this.id.
 
 ### Unit.setExtraCots(int number)
 Goal - set the number of extra resources needed
@@ -136,6 +144,7 @@ Steps - print out all of the relevant attributes in a nice way
 ---
 ### Site
 Goal - store multiple units as a member of the site and return the total number of cots/tents needed in the site
+Site will inherit from the Collection abstract class (with type Unit) and implement the Basic class as well.
 
 ### Site.Site()
 Goal - instantialize the attributes
@@ -155,16 +164,16 @@ Output - None
 
 Steps - set this.siteNum to siteNum
 
-### Site.addUnit()
-Goal - create a new unit and append it t the siteQ
+### Site.addItem()
+Goal - create a new unit and append it to the dataLL
 
 Input - none
 
 Output - none
 
-Steps - create a new site called tempUnit.  The unit constructor will handle all input for the information.  Then, append it to the end of unitQ
+Steps - create a new site called tempUnit.  The unit constructor will handle all input for the information.  Then, append it to the end of dataLL
 
-### Site.deleteUnit(int i)
+### Site.deleteItem(int i)
 Goal - delete a unit in the unit linked list
 
 Input - an integer representing the index of the list is needed
@@ -173,32 +182,23 @@ Output - None
 
 Steps - run the delete method of the linked list
 
-### Site.setSiteNum(int siteNum)
-Goal - Set the sites siteNum as the provided one
+### Site.setID(int siteNum)
+Goal - Set the sites id as the provided one
 
 Input - integer with the site number
 
 Output - None
 
-Steps - set this.siteNum to siteNum
+Steps - set this.id to siteNum
 
-### Site.getSiteNum(): int
+### Site.getID(): int
 Goal - get the site number
 
 Input - None
 
 Output - an integer containing the site number
 
-Steps - return this.siteNum
-
-### Site.getCots(): int and Site.getTents(): int
-Goal - return the number of cots and tents in a given site
-
-Input - none
-
-Output - integer representing the number of cots or tents in a site
-
-Steps - initialize a counter variable to 0.  Then use a for loop to iterate over the unitQ (treating it more like a traditional array) and count the number of tents/cots each unit return
+Steps - return this.id
 
 ### Site.menu() 
 Goal - create a menu where the user can edit the various aspects of the site
@@ -230,16 +230,123 @@ Steps - print out the site number, total cots/tents needed, number of units stay
 
 Input - integer from the user
 
-### Site.unitSelect(): int
-Goal - return an integer representing the index of a unit
+---
+### Hill
+Goal - the Hill object will hold and manage sites that are geographically close to one another in order to make later calculations easier.
+It will also inherit from the abstract class Collection with type site and implement the Basic interface
 
-Input - user input to select a unit
+### Hill.Hill(int id)
+Goal - initialize the attributes
 
-Output - An integer representing the location of the unit
+Input - an integer containing an id
 
-Steps - first define a sentry variable called keepGoing and set it to true. Then set the return value to -1 as an invalid result.  Then create a while loop while keepGoing is true.  Then create a scanner called input and print out all of the units to select using a for loop.  Then define an Integer response to handle type conversion.  In a try/catch block, we are going to set keepGoing to false and then try to convert the nextInt from input and put it in response.  If anything goes wrong, the exception will be cought, keepGoing set to true, and the loop will be ran again.  If the conversion goes ok, we will check if it is 0.  If it is 0, then set keepGoing to false and return -1 as in no valid option was selected.  If the response is greater than 0 and less than the length of the unitLL, set the returnValue to the response - 1 (since 0 was taken by quit, need to move the indices back). If any of the checks fail, prompt the user to input another valid response again.
+Output - none
 
+Steps - set the id of the hill to the provided one
 
+### Hill.setID(int num)
+Goal - set the ID of the hill
+
+Input - an integer containing an id
+
+Output - none
+
+Steps - set the id of the hill to the provided one
+
+### Hill.addItem() and Hill.addItem(int siteNum)
+Goal - add a site to the hill's dataLL
+
+Input - an integer representing the site number
+
+Output - none
+
+Steps - if no number was provided, prompt the user for one.  Then create a new site called tempSite and append it to the dataLL
+
+### Hill.printHillInfo()
+Goal - print out a small amount of information about the hill
+
+Input - none
+
+Output - Information about the hill
+
+Steps - print out a line telling how many sites the hill has along with how many cots and tents are needed
+
+### Hill.printAllInfo()
+Goal - print out all of the information about a hill
+
+Input - none
+
+Output - information about the hill, site, and units
+
+Steps - first call the this.printHillInfo method.  Then get the head of the dataLL and set it to currentNode.  Use a while loop to loop through it and print out all of the information in the sites contained in the dataLL.
+
+### Hill.menu()
+Goal - create a menu the user can use to edit the hill
+
+Input - input from the user to determine what to do
+
+Output - none
+
+Steps - create a boolean variable called keepGoing and set it to true.  Then use a while loop to handle the input from the user.  Create a new scanner called input for user input.  Then print out the current information about the unit along with the menu of options
+|Option|Description|Method|
+|---|---|---|
+|0|Quit|keepGoing = false|
+|1|See some hill info|.printHillInfo|
+|2|See all hill info| .printAllInfo|
+|3|Edit a site|.menu()|
+
+With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions. 
+
+---
+### Week
+Goal - Organize each of the hills so collecting information can be easier
+Week implements the Basic interface
+
+### Week.Week()
+Goal - setup the week to include the proper information
+
+Input - none
+
+Output - none
+
+Steps - Create three hills called wilderness, checaugau, and pioneer.  These three hills are not connected and are therefore separated.  In the constructor, use a loop to add sites to each of these hills.  wilderness gets sites 1-8, checaugau 9-15, and pioneer 16-21.
+
+### Week.getWild(), .getChec(), .getPio()
+Goal - return the given hill
+
+Input - none
+
+Output - a hill containing the information of one of the three hills
+
+Steps - return this.wilderness, checaugau, or pioneer
+d
+### Week.getCots(): int and .getTents(): int
+Goal - return an integer representing the number of cots/tents needed
+
+Input - none
+
+Output - an integer representing the number of cots/tents needed
+
+Steps - create a counter variable and set it to 0.  Then increment it by each of the hills .getCots method.  Return the counter variable
+
+### Week.menu()
+Goal - create a menu the user can use to edit the week
+
+Input - input from the user to determine what to do
+
+Output - none
+
+Steps - create a boolean variable called keepGoing and set it to true.  Then use a while loop to handle the input from the user.  Create a new scanner called input for user input.  Then print out the current information about the unit along with the menu of options
+|Option|Description|Method|
+|---|---|---|
+|0|Quit|keepGoing = false|
+|1|See some week info|.printWeekInfo|
+|2|See all info| .printAllInfo|
+|3|Edit Wilderness|.menu()|
+|4|Edit Checaugau|.menu()|
+|5|Edit Pioneer|.menu()|
+
+With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions. 
 
 ---
 ### GenericNode
@@ -397,12 +504,12 @@ Output - an integer representing the length of the list
 
 Steps - create a GenericNode called currentNode and currentNode gets head.  Also, create a length integer with the initial value of 0.  While the currentNode is not null, increment the length by 1 and then set the currentNode to the next node.  Once the loop is done, return the length.
 
-### GenericLL.get(int i): NodeType
-Goal - given an index, return the data in the node
+### GenericLL.get(int i): NodeTyp
+Goal - given an location, return the data in the node
 
 Input - an integer representing the index of the item in the linked list
 
-Output - the data from a node at the index i
+Output - the data from a node at the location i
 
 Steps - Create a GenericNode called currentNode and set it to null.  Create a returnValue and set it to null. Then check if i is a non-negative number.  If it is, set the currentNode to head and then start a for loop iterating over j while j < i, j++.  In the for loop, set the currentNode to the next node.  This will allow us to find the currentNode at the i index.  Out of the for loop, set the return value to the data in the current node.  Then return the retturnValue, which will either be data or null.   
 
@@ -415,3 +522,38 @@ Output - the data from a node at the index i
 
 Steps - Create a GenericNode called currentNode and set it to null.  Create a returnValue and set it to null. Then check if i is a non-negative number.  If it is, set the currentNode to head and then start a for loop iterating over j while j < i, j++.  In the for loop, set the currentNode to the next node.  This will allow us to find the currentNode at the i index.  Out of the for loop, set the return value to the data in the current node.  Then return the retturnValue, which will either be data or null.   
 
+---
+### Basic Interface
+Goal - Create an interface that will guide the construction of most of the classes for this project.  Some methods include int getCots(), int getTents(), int getID(), void setID(int num), and void menu().  These methods will be implemented in Unit, Site, Hill, and Week.
+
+---
+### Collection Abstract Class
+Goal - create an abstract class that can help implement the basic functionality of each class
+Abstract methods include void menu(), void printAllInfo(), void addItem().  It should also be noted that the Collection takes in a data type that implements the Basic interface.  This is so the linked list will be usable for each method.
+
+### Collection.deleteItem(int loc)
+Goal - given the location of an item in the linked list, delete it
+
+Input - integer containing the location of the item in the linked list
+
+Output - none
+
+Steps - call the .delete(loc) method of this.dataLL, which is the generic linked list in the collection
+
+### Collection.getCots(): int and Collection.getTents(): int
+Goal - return the number of cots and tents in the linked list
+
+Input - none
+
+Output - integer representing the number of cots or tents in a site
+
+Steps - initialize a counter variable to 0.  Then get the head node from dataLL and store it in currentNode.  While the currentNode is not null, get the data from the node, get the number of cots/tents from it, increment the counter variable, and set the currentNode to the next node.  This allows us to traverse over the linked list.  When the while loop is done, return the counter variable.
+
+### Collection.itemSelect(): int
+Goal - create a menu that allows the user to select an item from the linked list
+
+Input - integer from the user
+
+Output - the verified integer from the user
+
+Steps - first define a sentry variable called keepGoing and set it to true. Then set the return value to -1 as an invalid result.  Then create a while loop while keepGoing is true.  Then create a scanner called input and print out all of the items in the linked list to select using a for loop.  Then define an Integer response to handle type conversion.  In a try/catch block, we are going to set keepGoing to false and then try to convert the nextInt from input and put it in response.  If anything goes wrong, the exception will be cought, keepGoing set to true, and the loop will be ran again.  If the conversion goes ok, we will check if it is 0.  If it is 0, then set keepGoing to false and return -1 as in no valid option was selected.  If the response is greater than 0 and less than the length of the unitLL, set the returnValue to the response - 1 (since 0 was taken by quit, need to move the indices back). If any of the checks fail, prompt the user to input another valid response again.
