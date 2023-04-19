@@ -98,35 +98,101 @@ public class Main{
     } // end compareWeeks
 
     public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2){
-        
+
+        // get the head nodes for both weeks
         GenericNode<Site> currentNode1 = week1.getNode(0);
         GenericNode<Site> currentNode2 = week2.getNode(0);
         
+        // create counter variables so we know what the total delta is
         int cotCounter = 0;
         int tentCounter = 0;
+        
+        // create cot queues
+        // first pos will be the site num, second will be the number it has
+        GenericQ <int[]> needCotQ = new GenericQ<int[]>();
+        GenericQ <int[]> hasCotQ = new GenericQ<int[]>();
 
+        // go through every site until there is nothing in the linked list
         while(currentNode1 != null){
 
+            // get the sites from the current node
             Site site1 = currentNode1.getData();
             Site site2 = currentNode2.getData();
 
+            // find the delta between cots and tents per week
+            // positive means that more of an item will need to be there
+            // negative means there is a surplus
+            // 0 means no change
             int cotDiscrepancy = site2.getCots() - site1.getCots();
             int tentDiscrepancy = site2.getTents() - site1.getTents();
             
+            int[] tempCotArray = new int[2];
+            tempCotArray[0] = site1.getID();
+            tempCotArray[1] = cotDiscrepancy;
+
+            // check if the discrepancy is + or -
+            if(cotDiscrepancy > 0){
+                
+                // append the information to the end of the needCotQ
+                needCotQ.append(tempCotArray);
+    
+            } else if(cotDiscrepancy < 0){
+
+                hasCotQ.append(tempCotArray);
+
+            } // end if/else
+            // increment this to the total count
             cotCounter += cotDiscrepancy;
             tentCounter += tentDiscrepancy;
 
+            // print out the information for each site
             System.out.println("Information for site #" + site1.getID());
-            System.out.println("Tents neede: " + tentDiscrepancy);
+            System.out.println("Tents needed: " + tentDiscrepancy);
             System.out.println("Cots needed: " + cotDiscrepancy);
             System.out.println();
+
+            // get the next node
             currentNode1 = currentNode1.getNext();
             currentNode2 = currentNode2.getNext();
         } // end while loop
 
         System.out.println("This hill needs " + tentCounter + " more tents");
         System.out.println("This hill needs " + cotCounter + " more cots");
+
+        // if more cots are needed than available
+        if(cotCounter >= 0){
+
+            while(hasCotQ.length() > 0){
+                int[] hasCot = hasCotQ.pop();
+                int[] needCot = needCotQ.pop();
+
+                System.out.println("Site " + hasCot[0] + " has " + hasCot[1]);
+                System.out.println("Site " + needCot[0] + " has " + needCot[1]);
+
+            } // end while
+
+            // surplus scenario
+        } else if(cotCounter < 0){
+
+            while(needCotQ.length() > 0){
+                int[] hasCot = hasCotQ.pop();
+                int[] needCot = needCotQ.pop();
+
+                System.out.println("Site " + hasCot[0] + " has " + hasCot[1]);
+                System.out.println("Site " + needCot[0] + " has " + needCot[1]);
+
+            } // end while
+        } // end if/else
     } // end compareHill
+
+    public void move(int[] need, int[] has, String type){
+
+        if(Math.abs(need[1]) > Math.abs(has[1]){
+            need[1] = need[1] + has[1];
+            has[1] = 0;
+            System.out.println("Move " + has[1] + " " + type + " from site " + has[0] + " to site " + need[1]);
+
+            }}
     public void menu(){
 
         // define sentry variable
