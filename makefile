@@ -1,4 +1,4 @@
-Main.jar: Main.java Main.class Week.class Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
+Main.jar: Main.java Compare.class Main.class Week.class Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
 	jar -cvfm Main.jar manifest.txt *.*
 
 Main.class: Main.java Week.class Hill.class Site.class Unit.class GenericNode.class GenericQ.class GenericLL.class Collection.class Basic.class
@@ -15,6 +15,10 @@ Site.class: Site.java Unit.class GenericNode.class GenericQ.class GenericLL.clas
 
 Unit.class: Unit.java Collection.class Basic.class
 	javac -g Unit.java
+
+Compare.class: Compare.java GenericQ.class GenericNode.class
+	javac -g Compare.java
+
 
 GenericLL.class: GenericLL.java GenericNode.class
 	javac -g GenericLL.java

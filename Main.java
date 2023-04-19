@@ -145,54 +145,19 @@ public class Main{
             cotCounter += cotDiscrepancy;
             tentCounter += tentDiscrepancy;
 
-            // print out the information for each site
-            System.out.println("Information for site #" + site1.getID());
-            System.out.println("Tents needed: " + tentDiscrepancy);
-            System.out.println("Cots needed: " + cotDiscrepancy);
-            System.out.println();
-
             // get the next node
             currentNode1 = currentNode1.getNext();
             currentNode2 = currentNode2.getNext();
         } // end while loop
 
-        System.out.println("This hill needs " + tentCounter + " more tents");
-        System.out.println("This hill needs " + cotCounter + " more cots");
-
-        // if more cots are needed than available
-        if(cotCounter >= 0){
-
-            while(hasCotQ.length() > 0){
-                int[] hasCot = hasCotQ.pop();
-                int[] needCot = needCotQ.pop();
-
-                System.out.println("Site " + hasCot[0] + " has " + hasCot[1]);
-                System.out.println("Site " + needCot[0] + " has " + needCot[1]);
-
-            } // end while
-
-            // surplus scenario
-        } else if(cotCounter < 0){
-
-            while(needCotQ.length() > 0){
-                int[] hasCot = hasCotQ.pop();
-                int[] needCot = needCotQ.pop();
-
-                System.out.println("Site " + hasCot[0] + " has " + hasCot[1]);
-                System.out.println("Site " + needCot[0] + " has " + needCot[1]);
-
-            } // end while
-        } // end if/else
+        // create an instance of the compare class
+        Compare compare = new Compare();
+        compare.init(needCotQ, hasCotQ);
+        compare.move(needCotQ.pop(), hasCotQ.pop(), "cots");
+        System.out.println();
+    
     } // end compareHill
 
-    public void move(int[] need, int[] has, String type){
-
-        if(Math.abs(need[1]) > Math.abs(has[1]){
-            need[1] = need[1] + has[1];
-            has[1] = 0;
-            System.out.println("Move " + has[1] + " " + type + " from site " + has[0] + " to site " + need[1]);
-
-            }}
     public void menu(){
 
         // define sentry variable
