@@ -28,7 +28,7 @@ public class Compare{
 
             while(currentSet != null){
 
-                System.out.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra  " + type);
+                System.out.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra " + type);
                 currentSet = this.hasQ.pop();
 
             } // end while loop

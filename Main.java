@@ -112,6 +112,11 @@ public class Main{
         GenericQ <int[]> needCotQ = new GenericQ<int[]>();
         GenericQ <int[]> hasCotQ = new GenericQ<int[]>();
 
+        // create tent queues
+        GenericQ <int[]> needTentQ = new GenericQ<int[]>();
+        GenericQ <int[]> hasTentQ = new GenericQ<int[]>();
+
+
         // go through every site until there is nothing in the linked list
         while(currentNode1 != null){
 
@@ -130,6 +135,10 @@ public class Main{
             tempCotArray[0] = site1.getID();
             tempCotArray[1] = cotDiscrepancy;
 
+            int[] tempTentArray = new int[2];
+            tempTentArray[0] = site1.getID();
+            tempTentArray[1] = tentDiscrepancy;
+
             // check if the discrepancy is + or -
             if(cotDiscrepancy > 0){
                 
@@ -139,6 +148,19 @@ public class Main{
             } else if(cotDiscrepancy < 0){
 
                 hasCotQ.append(tempCotArray);
+
+            } // end if/else
+
+            // check the tent discrepancy
+            if(tentDiscrepancy > 0){
+
+                // append the information to needTentQ
+                needTentQ.append(tempTentArray);
+
+            } else if(tentDiscrepancy < 0){
+
+                // append the information to hasTentQ
+                hasTentQ.append(tempTentArray);
 
             } // end if/else
             // increment this to the total count
@@ -151,11 +173,16 @@ public class Main{
         } // end while loop
 
         // create an instance of the compare class
-        Compare compare = new Compare();
-        compare.init(needCotQ, hasCotQ);
-        compare.move(needCotQ.pop(), hasCotQ.pop(), "cots");
+        Compare cotCompare = new Compare();
+        cotCompare.init(needCotQ, hasCotQ);
+        cotCompare.move(needCotQ.pop(), hasCotQ.pop(), "cots");
+
         System.out.println();
-    
+
+        Compare tentCompare = new Compare();
+        tentCompare.init(needTentQ, hasTentQ);
+        tentCompare.move(needTentQ.pop(), hasTentQ.pop(), "tents");
+
     } // end compareHill
 
     public void menu(){
