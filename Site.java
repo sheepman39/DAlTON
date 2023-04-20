@@ -72,11 +72,10 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
             System.out.println();
             System.out.println("Menu for site #" + this.getID());
             System.out.println("0) Quit");
-            System.out.println("1) Change site num");
-            System.out.println("2) See all site info");
-            System.out.println("3) Add a unit");
-            System.out.println("4) Edit a unit");
-            System.out.println("5) Delete a unit");
+            System.out.println("1) See all site info");
+            System.out.println("2) Add a unit");
+            System.out.println("3) Edit a unit");
+            System.out.println("4) Delete a unit");
 
             // store the response in response
             String response = input.nextLine();
@@ -91,25 +90,16 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
                 keepGoing = false;
 
             } else if(response.equals("1")){
-
-                // change the unit number
-                int num = Unit.integerInput("What would you like the new number to be?: ");
-                this.setID(num);
-
-                // confirmation message
-                System.out.println("Ok the site number is now " + this.getID());
-
-            } else if(response.equals("2")){
                 
                 // print all of the info
                 this.printAllInfo(); 
 
-            } else if(response.equals("3")){
+            } else if(response.equals("2")){
 
                 // add a unit
                 this.addItem();
 
-            } else if(response.equals("4")){
+            } else if(response.equals("3")){
                 
                 // message to edit
                 System.out.println("Please select a unit to edit");
@@ -124,7 +114,7 @@ public class Site extends Collection<Unit> implements Serializable, Basic{
                     this.dataLL.get(unitIndex).menu();
                 
                 } // end if
-            } else if(response.equals("5")){
+            } else if(response.equals("4")){
                 
                 // message to edit
                 System.out.println("Please select a unit to DELETE");

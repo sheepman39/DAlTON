@@ -27,23 +27,25 @@ public class Week implements Basic, Serializable{
         // Wilderness: sites 1-8
         // Checaugau: sites 9-15
         // Pioneer: sites 16-21
-
+        int[] wildOrder = {8, 7, 1, 6, 5, 2, 3, 4};
+        int[] checOrder = {9, 10, 11, 15, 14, 12, 13};
+        int[] pioOrder = {17, 21, 18, 19, 16, 20};
         // we will use a for loop to assign each hill the right number of sites
-        for(int i = 1; i <= 8; i++){
+        for(int i = 0; i < wildOrder.length; i++){
             
-            wilderness.addItem(i);
+            wilderness.addItem(wildOrder[i]);
 
         } // end for loop
 
-        for(int i = 9; i <= 15; i++){
+        for(int i = 0; i < checOrder.length; i++){
 
-            checaugau.addItem(i);
+            checaugau.addItem(checOrder[i]);
 
         } // end for loop
 
-        for(int i = 16; i <= 21; i++){
+        for(int i = 0; i < pioOrder.length; i++){
 
-            pioneer.addItem(i);
+            pioneer.addItem(pioOrder[i]);
 
         } // end for loop
 

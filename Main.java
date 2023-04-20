@@ -80,6 +80,7 @@ public class Main{
     } // end print some info
 
     public void compareWeeks(Week week1, Week week2){
+   
         // goal: compare each hill, site ect
         // compare wilderness
         GenericLL<Site> chec1 = week1.getChec().getSites();
@@ -92,9 +93,12 @@ public class Main{
         GenericLL<Site> pio2 = week2.getPio().getSites();
 
         this.compareHills(wild1, wild2);
+        System.out.println();
         this.compareHills(chec1, chec2);
+        System.out.println();
         this.compareHills(pio1, pio2);
-
+        System.out.println();
+    
     } // end compareWeeks
 
     public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2){
@@ -170,6 +174,7 @@ public class Main{
             // get the next node
             currentNode1 = currentNode1.getNext();
             currentNode2 = currentNode2.getNext();
+        
         } // end while loop
 
         // create an instance of the compare class
@@ -183,10 +188,14 @@ public class Main{
         tentCompare.init(needTentQ, hasTentQ);
         tentCompare.move(needTentQ.pop(), hasTentQ.pop(), "tents");
 
+        System.out.println();
     } // end compareHill
 
     public void menu(){
 
+        // WELCOME TO DAlTON
+        System.out.println("WELCOME TO DAlTON MK 1");
+        
         // define sentry variable
         boolean keepGoing = true;
 
