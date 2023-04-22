@@ -1,13 +1,14 @@
+
 // Hill.java
 import java.util.*;
 import java.io.*;
 
-public class Hill extends Collection<Site> implements Serializable, Basic{
+public class Hill extends Collection<Site> implements Serializable, Basic {
 
     // name
     String name;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         // test harness
         Hill testHill = new Hill();
@@ -15,58 +16,58 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         testHill.menu();
     } // end main
 
-    public Hill(){
+    public Hill() {
         this.id = -1;
         this.name = null;
     } // end constructor
 
-    public Hill(int id){
+    public Hill(int id) {
         this.id = id;
         this.name = null;
     } // end Hill
 
-    public Hill(String name){
+    public Hill(String name) {
 
         this.name = name;
         this.id = -1;
-    
+
     } // end constructor
-    
-    public int getID(){
+
+    public int getID() {
 
         // returnt the id
         return this.id;
 
     } // end getID
 
-    public void setID(int num){
-    
-        // set the id to the provided option 
+    public void setID(int num) {
+
+        // set the id to the provided option
         this.id = num;
 
     } // end setID
 
-    public String getName(){
+    public String getName() {
 
         // return the name
         return this.name;
 
     } // end getName
 
-    public void setName(String name){
+    public void setName(String name) {
 
         // set the name to the provided one
         this.name = name;
 
     } // end setName
 
-    public GenericLL getSites(){
+    public GenericLL<Site> getSites() {
 
         return this.dataLL;
-    
+
     } // end getSites
-    
-    public void addItem(){
+
+    public void addItem() {
 
         // prompt the user for what the new site number should be
         int siteNum = Unit.integerInput("What should the new site number be?");
@@ -79,7 +80,7 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
     } // end addSite
 
-    public void addItem(int siteNum){
+    public void addItem(int siteNum) {
 
         // creatte a site
         Site tempSite = new Site(siteNum);
@@ -89,7 +90,7 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
     } // end addSite
 
-    public void printHillInfo(){
+    public void printHillInfo() {
 
         // print the information about this hill
         System.out.println("Information about " + this.getName() + ": ");
@@ -98,21 +99,21 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         System.out.println("Tents needed: " + this.getTents());
 
     } // end printHillInfo()
-    
-    public void printSiteInfo(){
-        
+
+    public void printSiteInfo() {
+
         // call printHillInfo
         this.printHillInfo();
 
         // find just the cots/tents needed per site
         // print out each site info
-        GenericNode <Site> currentNode = this.dataLL.getNode(0);
-        
+        GenericNode<Site> currentNode = this.dataLL.getNode(0);
+
         // buffer
         System.out.println();
 
         // iterate through each of the sites
-        while(currentNode != null){
+        while (currentNode != null) {
 
             // temp site
             Site tempSite = currentNode.getData();
@@ -130,16 +131,16 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         } // end while loop
     } // end printSiteInfo
 
-    public void printAllInfo(){
+    public void printAllInfo() {
 
         // print out the hill info
         this.printHillInfo();
 
         // print out each site info
-        GenericNode <Site> currentNode = this.dataLL.getNode(0);
-        
+        GenericNode<Site> currentNode = this.dataLL.getNode(0);
+
         // iterate through each of the sites
-        while(currentNode != null){
+        while (currentNode != null) {
 
             // temp site
             Site tempSite = currentNode.getData();
@@ -154,13 +155,13 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         } // end while loop
     } // end printAllInfo
 
-    public void menu(){
+    public void menu() {
 
         // define sentry variable
         boolean keepGoing = true;
 
         // loop to control the menu
-        while(keepGoing){
+        while (keepGoing) {
 
             // create the new scanner for input
             Scanner input = new Scanner(System.in);
@@ -184,40 +185,41 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
             System.out.println();
 
             // input handling
-            if(response.equals("0")){
+            if (response.equals("0")) {
 
                 // quit
                 keepGoing = false;
 
-            } else if(response.equals("1")){
+            } else if (response.equals("1")) {
 
                 // see some hill info
                 this.printHillInfo();
 
-            } else if(response.equals("2")){
-                
-                // print hill + site info 
+            } else if (response.equals("2")) {
+
+                // print hill + site info
                 this.printSiteInfo();
 
-            }else if(response.equals("3")){
-                
-                // print all of the info
-                this.printAllInfo(); 
+            } else if (response.equals("3")) {
 
-            } else if(response.equals("4")){
-                
+                // print all of the info
+                this.printAllInfo();
+
+            } else if (response.equals("4")) {
+
                 // message to edit
                 System.out.println("Please select a site to edit");
 
                 // run a sub-menu to select which unit to edit
                 int siteLoc = this.itemSelect();
 
-                // check if the response is greater than or equal to 0, meaning the user selected a valid response
-                if(siteLoc >= 0){
+                // check if the response is greater than or equal to 0, meaning the user
+                // selected a valid response
+                if (siteLoc >= 0) {
 
                     // get the unit and run the menu
                     this.dataLL.get(siteLoc).menu();
-                
+
                 } // end if
 
             } else {

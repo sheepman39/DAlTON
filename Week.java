@@ -1,19 +1,21 @@
+
 // Week.java
 import java.util.*;
 import java.io.*;
 
-public class Week implements Basic, Serializable{
-    
+public class Week implements Basic, Serializable {
+
     // id
     int id;
 
-    // since each hill is not connected in any way, we will not put them in any sort of data structure.  They must be processed separately
+    // since each hill is not connected in any way, we will not put them in any sort
+    // of data structure. They must be processed separately
     Hill wilderness = new Hill("Wilderness");
     Hill checaugau = new Hill("Checaugau");
     Hill pioneer = new Hill("Pioneer");
 
-    public static void main(String[] args){
-    
+    public static void main(String[] args) {
+
         Week testWeek = new Week();
         testWeek.setID(1);
 
@@ -21,55 +23,56 @@ public class Week implements Basic, Serializable{
 
     } // end main
 
-    public Week(){
+    public Week() {
 
         // each hill has a certain number of sites assigned to them
         // Wilderness: sites 1-8
         // Checaugau: sites 9-15
         // Pioneer: sites 16-21
-        int[] wildOrder = {8, 7, 1, 6, 5, 2, 3, 4};
-        int[] checOrder = {9, 10, 11, 15, 14, 12, 13};
-        int[] pioOrder = {17, 21, 18, 19, 16, 20};
+        int[] wildOrder = { 8, 7, 1, 6, 5, 2, 3, 4 };
+        int[] checOrder = { 9, 10, 11, 15, 14, 12, 13 };
+        int[] pioOrder = { 17, 21, 18, 19, 16, 20 };
+        
         // we will use a for loop to assign each hill the right number of sites
-        for(int i = 0; i < wildOrder.length; i++){
-            
+        for (int i = 0; i < wildOrder.length; i++) {
+
             wilderness.addItem(wildOrder[i]);
 
         } // end for loop
 
-        for(int i = 0; i < checOrder.length; i++){
+        for (int i = 0; i < checOrder.length; i++) {
 
             checaugau.addItem(checOrder[i]);
 
         } // end for loop
 
-        for(int i = 0; i < pioOrder.length; i++){
+        for (int i = 0; i < pioOrder.length; i++) {
 
             pioneer.addItem(pioOrder[i]);
 
         } // end for loop
 
     } // end constructor
-    
-    public Hill getWild(){
+
+    public Hill getWild() {
 
         return this.wilderness;
 
     } // end getWild
 
-    public Hill getChec(){
+    public Hill getChec() {
 
         return this.checaugau;
 
     } // end getChec
 
-    public Hill getPio(){
+    public Hill getPio() {
 
         return this.pioneer;
 
     } // end getPio
 
-    public int getCots(){
+    public int getCots() {
 
         // cot num will store the number of cots needed
         int cotNum = 0;
@@ -84,7 +87,7 @@ public class Week implements Basic, Serializable{
 
     } // end getCots()
 
-    public int getTents(){
+    public int getTents() {
 
         // tentNum will store the number of tents needed
         int tentNum = 0;
@@ -99,30 +102,30 @@ public class Week implements Basic, Serializable{
 
     } // end getTents()
 
-    public int getID(){
-    
+    public int getID() {
+
         return this.id;
-    
+
     } // end getID
 
-    public void setID(int num){
-        
+    public void setID(int num) {
+
         this.id = num;
 
     } // end setID
 
-    public void printWeekInfo(){
+    public void printWeekInfo() {
 
         System.out.println("Information for week #" + this.getID());
         System.out.println("Total Tents: " + this.getTents());
         System.out.println("Total Cots: " + this.getCots());
 
     } // end getWeekInfo
-    
-    public void printSiteInfo(){
-        
+
+    public void printSiteInfo() {
+
         // print out existing info
-        this.printWeekInfo(); 
+        this.printWeekInfo();
 
         // print out each of the hills info
         this.wilderness.printSiteInfo();
@@ -131,11 +134,10 @@ public class Week implements Basic, Serializable{
 
     } // end getSiteInfo
 
+    public void printAllInfo() {
 
-    public void printAllInfo(){
-        
         // print out existing info
-        this.printWeekInfo(); 
+        this.printWeekInfo();
 
         // print out each of the hills info
         this.wilderness.printAllInfo();
@@ -144,13 +146,13 @@ public class Week implements Basic, Serializable{
 
     } // end getAllInfo
 
-    public void menu(){
+    public void menu() {
 
         // define sentry variable
         boolean keepGoing = true;
 
         // loop to control the menu
-        while(keepGoing){
+        while (keepGoing) {
 
             // create the new scanner for input
             Scanner input = new Scanner(System.in);
@@ -176,40 +178,40 @@ public class Week implements Basic, Serializable{
             System.out.println();
 
             // input handling
-            if(response.equals("0")){
+            if (response.equals("0")) {
 
                 // quit
                 keepGoing = false;
 
-            } else if(response.equals("1")){
+            } else if (response.equals("1")) {
 
                 // see some hill info
                 this.printWeekInfo();
 
-            } else if(response.equals("2")){
-                
+            } else if (response.equals("2")) {
+
                 // print site info
                 this.printSiteInfo();
 
-            }else if(response.equals("3")){
-                
-                // print all of the info
-                this.printAllInfo(); 
+            } else if (response.equals("3")) {
 
-            } else if(response.equals("4")){
+                // print all of the info
+                this.printAllInfo();
+
+            } else if (response.equals("4")) {
 
                 // edit the wilderness hill
                 System.out.println("Now editing Wilderness...");
                 this.wilderness.menu();
 
-            } else if(response.equals("5")){
-            
+            } else if (response.equals("5")) {
+
                 // edit the checaugau hill
                 System.out.println("Now editing Checaugau...");
                 this.checaugau.menu();
 
-            } else if(response.equals("6")){
-            
+            } else if (response.equals("6")) {
+
                 // edit the pioneer hill
                 System.out.println("Now editing Pioneer...");
                 this.pioneer.menu();

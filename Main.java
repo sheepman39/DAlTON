@@ -1,32 +1,34 @@
+
 // Main.java
 import java.util.*;
 import java.io.*;
 
-public class Main{
+public class Main {
 
     // we will use an arraylist to handle persistent data
     ArrayList<Week> weekList = new ArrayList<Week>();
 
-    public static void main(String[] args){
-    
+    public static void main(String[] args) {
+
         Main main = new Main();
 
         main.menu();
+
     } // end main
 
-    public Main(){
+    public Main() {
 
         // try to load up any existing data
         this.load();
 
     } // end constructor
 
-    public void addWeek(int weekNum){
+    public void addWeek(int weekNum) {
 
         // create a new week with the given weekNum
         Week tempWeek = new Week();
         tempWeek.setID(weekNum);
-        
+
         // append it to the end of the list
         this.weekList.add(tempWeek);
 
@@ -35,22 +37,22 @@ public class Main{
 
     } // end addWeek
 
-    public void deleteWeek(int index){
+    public void deleteWeek(int index) {
 
         // delete a week
         this.weekList.remove(index);
 
     } // end deleteWeek
-    
-    public void printSomeInfo(){
-        
+
+    public void printSomeInfo() {
+
         // print some basic information
         System.out.println("Information for Camp Blackhawk (GO!): ");
         System.out.println("We have " + this.weekList.size() + " weeks of camp");
-        
+
         // use a for loop to print cots/tents needed for each week/hill
-        for(int i = 0; i < this.weekList.size(); i++){
-            
+        for (int i = 0; i < this.weekList.size(); i++) {
+
             // get the current week
             Week tempWeek = this.weekList.get(i);
 
@@ -60,16 +62,15 @@ public class Main{
         } // end for loop
     } // end print some info
 
-        
-    public void printAllInfo(){
-        
+    public void printAllInfo() {
+
         // print some basic information
         System.out.println("Information for Camp Blackhawk (GO!): ");
         System.out.println("We have " + this.weekList.size() + " weeks of camp");
-        
+
         // use a for loop to print cots/tents needed for each week/hill
-        for(int i = 0; i < this.weekList.size(); i++){
-            
+        for (int i = 0; i < this.weekList.size(); i++) {
+
             // get the current week
             Week tempWeek = this.weekList.get(i);
 
@@ -79,10 +80,10 @@ public class Main{
         } // end for loop
     } // end print some info
 
-    public void compareWeeks(Week week1, Week week2){
+    public void compareWeeks(Week week1, Week week2) {
 
         // since we want to save this data to a file, we will create that file here
-        try{
+        try {
             // create a new file based on the id's of the two weeks
             String fileName = "Week" + week1.getID() + "ToWeek" + week2.getID() + ".txt";
             FileWriter outFile = new FileWriter(fileName, false);
@@ -98,7 +99,7 @@ public class Main{
 
             GenericLL<Site> pio1 = week1.getPio().getSites();
             GenericLL<Site> pio2 = week2.getPio().getSites();
-            
+
             output.println("=======Wilderness=======");
             this.compareHills(wild1, wild2, output);
             System.out.println();
@@ -113,40 +114,38 @@ public class Main{
             this.compareHills(pio1, pio2, output);
             System.out.println();
             output.println();
-            
+
             // close the files
             outFile.close();
             output.close();
 
             // confirmation message
             System.out.println("Results saved to " + fileName);
-        } catch(Exception e){
+        
+        } catch (Exception e) {
+        
             System.out.println(e.getMessage());
+        
         } // end try/catch block
     } // end compareWeeks
 
-    public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2, PrintWriter output){
+    public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2, PrintWriter output) {
 
         // get the head nodes for both weeks
         GenericNode<Site> currentNode1 = week1.getNode(0);
         GenericNode<Site> currentNode2 = week2.getNode(0);
-        
-        // create counter variables so we know what the total delta is
-        int cotCounter = 0;
-        int tentCounter = 0;
-        
+
         // create cot queues
         // first pos will be the site num, second will be the number it has
-        GenericQ <int[]> needCotQ = new GenericQ<int[]>();
-        GenericQ <int[]> hasCotQ = new GenericQ<int[]>();
+        GenericQ<int[]> needCotQ = new GenericQ<int[]>();
+        GenericQ<int[]> hasCotQ = new GenericQ<int[]>();
 
         // create tent queues
-        GenericQ <int[]> needTentQ = new GenericQ<int[]>();
-        GenericQ <int[]> hasTentQ = new GenericQ<int[]>();
-
+        GenericQ<int[]> needTentQ = new GenericQ<int[]>();
+        GenericQ<int[]> hasTentQ = new GenericQ<int[]>();
 
         // go through every site until there is nothing in the linked list
-        while(currentNode1 != null){
+        while (currentNode1 != null) {
 
             // get the sites from the current node
             Site site1 = currentNode1.getData();
@@ -158,7 +157,7 @@ public class Main{
             // 0 means no change
             int cotDiscrepancy = site2.getCots() - site1.getCots();
             int tentDiscrepancy = site2.getTents() - site1.getTents();
-            
+
             int[] tempCotArray = new int[2];
             tempCotArray[0] = site1.getID();
             tempCotArray[1] = cotDiscrepancy;
@@ -168,66 +167,66 @@ public class Main{
             tempTentArray[1] = tentDiscrepancy;
 
             // check if the discrepancy is + or -
-            if(cotDiscrepancy > 0){
-                
+            if (cotDiscrepancy > 0) {
+
                 // append the information to the end of the needCotQ
                 needCotQ.append(tempCotArray);
-    
-            } else if(cotDiscrepancy < 0){
+
+            } else if (cotDiscrepancy < 0) {
 
                 hasCotQ.append(tempCotArray);
 
             } // end if/else
 
             // check the tent discrepancy
-            if(tentDiscrepancy > 0){
+            if (tentDiscrepancy > 0) {
 
                 // append the information to needTentQ
                 needTentQ.append(tempTentArray);
 
-            } else if(tentDiscrepancy < 0){
+            } else if (tentDiscrepancy < 0) {
 
                 // append the information to hasTentQ
                 hasTentQ.append(tempTentArray);
 
             } // end if/else
-            // increment this to the total count
-            cotCounter += cotDiscrepancy;
-            tentCounter += tentDiscrepancy;
 
             // get the next node
             currentNode1 = currentNode1.getNext();
             currentNode2 = currentNode2.getNext();
-        
+
         } // end while loop
 
         // create an instance of the compare class
         output.println("Cots:");
+
+        // compare the cots
         Compare cotCompare = new Compare();
         cotCompare.init(needCotQ, hasCotQ);
         cotCompare.move(needCotQ.pop(), hasCotQ.pop(), "cots", output);
 
-        System.out.println();
-        output.println();
+        output.println();        
         output.println("Tents:");
 
+        // compare the tents
         Compare tentCompare = new Compare();
         tentCompare.init(needTentQ, hasTentQ);
         tentCompare.move(needTentQ.pop(), hasTentQ.pop(), "tents", output);
 
+        // spacer
         System.out.println();
     } // end compareHill
 
-    public void menu(){
+    public void menu() {
 
         // WELCOME TO DAlTON
         System.out.println("WELCOME TO DAlTON MK 1");
-        
+
         // define sentry variable
         boolean keepGoing = true;
 
         // loop to control the menu
-        while(keepGoing){
+        while (keepGoing) {
 
             // create the new scanner for input
             Scanner input = new Scanner(System.in);
@@ -253,56 +252,60 @@ public class Main{
             System.out.println();
 
             // input handling
-            if(response.equals("0")){
+            if (response.equals("0")) {
 
                 // quit
                 keepGoing = false;
-               
+
                 // save
                 this.save();
-            } else if(response.equals("1")){
+
+            } else if (response.equals("1")) {
 
                 // print some information
                 this.printSomeInfo();
 
-            } else if(response.equals("2")){
+            } else if (response.equals("2")) {
 
                 // print all info
                 this.printAllInfo();
 
-            } else if(response.equals("3")){
+            } else if (response.equals("3")) {
 
                 // add a week
                 // get an integer from the user
                 int weekNum = Unit.integerInput("What week number will the new week be? ");
 
                 System.out.println("Weeknum" + weekNum);
-                
+
                 // add the week
                 this.addWeek(weekNum);
 
-            } else if(response.equals("4")){
-                
+            } else if (response.equals("4")) {
+
                 // edit a week
                 System.out.println("Please select a week to edit");
                 int index = this.weekSelect();
 
-                if(index >= 0){
+                if (index >= 0) {
 
                     // open the menu of that week
                     this.weekList.get(index).menu();
+
                 } else {
+
                     System.out.println("Invalid week inputed. Returning to main menu");
+                
                 } // end inner if/else
 
-            } else if(response.equals("5")){
-                    
+            } else if (response.equals("5")) {
+
                 // delete a week
                 System.out.println("Please select a week to DELETE");
                 int index = this.weekSelect();
 
                 // check if the response was valid
-                if(index >= 0){
+                if (index >= 0) {
 
                     // delete the week
                     this.deleteWeek(index);
@@ -310,29 +313,33 @@ public class Main{
                 } else {
 
                     System.out.println("Invalid week. Nothing was deleted");
+
                 } // end inner if/else
 
-            } else if(response.equals("6")){
+            } else if (response.equals("6")) {
+
                 // delete a week
                 System.out.println("Please select the first week to select");
                 int firstIndex = this.weekSelect();
 
                 System.out.println("Please select the second week to compare");
                 int secondIndex = this.weekSelect();
-                
+
                 // check if the response was valid
-                if(firstIndex >= 0 && secondIndex >= 0){
+                if (firstIndex >= 0 && secondIndex >= 0) {
 
                     // get the week
                     Week week1 = this.weekList.get(firstIndex);
                     Week week2 = this.weekList.get(secondIndex);
                     this.compareWeeks(week1, week2);
+
                 } else {
 
                     System.out.println("Invalid week selected. Nothing was selected");
 
                 } // end inner if/else
-            } else { 
+                
+            } else {
 
                 // error message
                 System.out.println("Please put in a valid option");
@@ -342,16 +349,16 @@ public class Main{
     } // end menu
 
     @SuppressWarnings("unchecked")
-    public void load(){
+    public void load() {
 
         // load up any data that already exists
-        try{
+        try {
 
             FileInputStream fIn = new FileInputStream("campData.dat");
             ObjectInputStream obIn = new ObjectInputStream(fIn);
-            this.weekList = (ArrayList<Week>)obIn.readObject();
+            this.weekList = (ArrayList<Week>) obIn.readObject();
 
-        } catch(Exception e){
+        } catch (Exception e) {
 
             // if there is an error, print it here
             System.out.println("Loading ERROR: " + e.getMessage());
@@ -363,8 +370,8 @@ public class Main{
         } // end try/catch blocks
     } // end load
 
-    public void resetFile(){
-        try{
+    public void resetFile() {
+        try {
 
             // create a new dogList.dat file
             File newFile = new File("campData.dat");
@@ -375,17 +382,17 @@ public class Main{
             newWeek.setID(1);
             this.weekList.add(newWeek);
 
-        } catch(Exception e){
+        } catch (Exception e) {
 
             System.out.println("ERROR Resetting file: " + e.getMessage());
             System.out.println("Unable to run this program on this machine, shutting down...");
             System.exit(1);
 
         } // end try/catch
-     } // end resetFile
+    } // end resetFile
 
     @SuppressWarnings("unchecked")
-    public void save(){
+    public void save() {
 
         // try to save any data that is in users
         try {
@@ -394,7 +401,7 @@ public class Main{
             ObjectOutputStream obOut = new ObjectOutputStream(fOut);
             obOut.writeObject(this.weekList);
 
-        } catch(Exception e){
+        } catch (Exception e) {
 
             // if there is an error, print it here
             System.out.println("Saving ERROR: " + e.getMessage());
@@ -402,12 +409,12 @@ public class Main{
         } // end try/catch blocks
     } // end save
 
-    public void sortWeeks(){
+    public void sortWeeks() {
 
         // use an insertion sort to sort each week by their id
         // begin with a for loop to go over the arrayList
-        for(int i = 0; i < this.weekList.size() - 1; i++){
-            
+        for (int i = 0; i < this.weekList.size() - 1; i++) {
+
             // set the value of j here
             int j = i;
 
@@ -415,13 +422,13 @@ public class Main{
             boolean keepGoing = true;
 
             // while loop wil lkeep switching until an element is in the proper place
-            while(keepGoing){
+            while (keepGoing) {
 
                 // if the current j id value is greater than the next one, swap
-                if(this.weekList.get(j).getID() > this.weekList.get(j + 1).getID()){
+                if (this.weekList.get(j).getID() > this.weekList.get(j + 1).getID()) {
 
                     // make sure j is non-negative as it loops backwards
-                    if(j >= 0){
+                    if (j >= 0) {
                         // swap the two elementsi
                         Week tempWeek = this.weekList.get(j);
 
@@ -441,16 +448,16 @@ public class Main{
 
                     } // end inner if/else
                 } else {
-                    
+
                     // end the loop
                     keepGoing = false;
-                
+
                 } // end out if/else loop
             } // end while loop
         } // end for loop
     } // end sort week
 
-    public int weekSelect(){
+    public int weekSelect() {
 
         // sentry variable
         boolean keepGoing = true;
@@ -459,11 +466,11 @@ public class Main{
         int returnValue = -1;
 
         // while loop to control user input
-        while(keepGoing){
+        while (keepGoing) {
 
             // create the new scanner for input
             Scanner input = new Scanner(System.in);
-        
+
             // output all of the options for the units
             System.out.println("");
             System.out.println("Please select an option");
@@ -473,71 +480,73 @@ public class Main{
 
             // counter will tell the user which option to select to edit a given unit
             int counter = 1;
-            for(int i = 0; i < this.weekList.size(); i++){
+            for (int i = 0; i < this.weekList.size(); i++) {
 
                 // print the week numbers
                 System.out.println(counter + ") Select " + weekList.get(i).getID());
 
                 // increment counter
                 counter++;
-           
+
             } // end while loop
-           
+
             // spacer
             System.out.println("");
-            
+
             // define response
             Integer response;
 
-            // since we have to turn the user's response into an int to use in the unit list, we will run the following code
-            try{
+            // since we have to turn the user's response into an int to use in the unit
+            // list, we will run the following code
+            try {
 
                 // set keepGoing to false
                 keepGoing = false;
 
                 // attempt to put the input in response
                 response = input.nextInt();
-                
+
                 // check if the response is the same as the size of the dogs list
-                if(response.equals(0)){
-                
+                if (response.equals(0)) {
+
                     // quit
                     keepGoing = false;
-                
-                // note: offset response by -1 since quit is 0
-                } else if(response - 1 < this.weekList.size()){
 
-                    if(response > 0){
-                        
+                    // note: offset response by -1 since quit is 0
+                } else if (response - 1 < this.weekList.size()) {
+
+                    if (response > 0) {
+
                         // if it is a valid index, run the menu of that unit
                         // note that it is -1 since we added 1 in the menu
                         returnValue = (response - 1);
-                
+
                     } else {
 
                         // keep prompting the user for valid input
                         System.out.println("Please input a valid number greater than 0");
-                        keepGoing = true; 
-                    
+                        keepGoing = true;
+
                     } // end inner if/else
-                
+
                 } else {
 
                     // keep prompting the user for valid input
                     System.out.println("Please input a valid number");
                     keepGoing = true;
-                
-                } // end if/else
-                
-            } catch(NumberFormatException e){
 
-                // this exception means that an invalid answer was put in so we will clarify for the user
+                } // end if/else
+
+            } catch (NumberFormatException e) {
+
+                // this exception means that an invalid answer was put in so we will clarify for
+                // the user
                 System.out.println("Please input a valid number");
 
                 // reset keepGoing
                 keepGoing = true;
 
-            } catch(Exception e){
+            } catch (Exception e) {
 
                 // if this happens we aren't sure what the error is
                 System.out.println("Unexpected error. Please input a valid number.");
@@ -545,9 +554,9 @@ public class Main{
 
                 // reset keepGoing
                 keepGoing = true;
-            
+
             } // end try/catch blocks
-        } // end while loop 
+        } // end while loop
 
         // return the value
         return returnValue;

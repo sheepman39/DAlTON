@@ -1,10 +1,11 @@
+
 // Unit.java
 import java.math.*;
 import java.util.*;
 import java.io.*;
 
-public class Unit implements Serializable, Basic{
-    
+public class Unit implements Serializable, Basic {
+
     // attributes to describe each unit
     int id;
     int youthM;
@@ -14,14 +15,14 @@ public class Unit implements Serializable, Basic{
     int extraCots;
     int extraTents;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         Unit testUnit = new Unit();
         testUnit.menu();
 
     } // end main
 
-    public Unit(){
+    public Unit() {
 
         this.id = integerInput("What is your unit number?");
         this.youthM = integerInput("How many youth (m) do you have?");
@@ -31,18 +32,18 @@ public class Unit implements Serializable, Basic{
         this.extraCots = integerInput("How many extra cots will you need?");
         this.extraTents = integerInput("How many extra tents will you need?");
 
-    }// end constructor 
+    }// end constructor
 
-    public static int integerInput(String prompt){
+    public static int integerInput(String prompt) {
 
         // sentry variable
         boolean keepGoing = true;
-        
+
         // integer response will hold the response
         Integer response = 0;
 
-        while(keepGoing){
-            
+        while (keepGoing) {
+
             // create new scanner for input
             Scanner input = new Scanner(System.in);
 
@@ -51,30 +52,29 @@ public class Unit implements Serializable, Basic{
             System.out.print(prompt);
 
             // try/catch block to handle int input
-            try{
-                
+            try {
+
                 // convert input to integer
                 response = input.nextInt();
 
                 // all responses must be positive or 0
-                if(response >= 0){
-                    
+                if (response >= 0) {
+
                     // set keepGoing to false to end the loop
                     keepGoing = false;
 
                 } else {
-                
+
                     System.out.println("Please input a number greater than 0");
 
                 } // end if/else block
-            
-            } catch (Exception e){
+
+            } catch (Exception e) {
 
                 // give an error message
                 System.out.println("Please input a valid number");
 
             } // end try/catch block
-
         } // end while loop
 
         // return the response value
@@ -82,8 +82,7 @@ public class Unit implements Serializable, Basic{
 
     } // end integerInput
 
-
-    public int getCots(){
+    public int getCots() {
 
         // total cots will be the return value
         int totalCots = this.adultM;
@@ -97,14 +96,15 @@ public class Unit implements Serializable, Basic{
 
     } // end getCots
 
-    public int getTents(){
+    public int getTents() {
 
         // total tents will be the return value
-        // since we allocate two people per tent, following certain guidelines, divide each group by 2 and take the ceiling of it so everyone can have a space. 
-        int totalTents = (int) Math.ceil(this.adultM/2.0);
-        totalTents += (int) Math.ceil(this.adultF/2.0);
-        totalTents += (int) Math.ceil(this.youthM/2.0);
-        totalTents += (int) Math.ceil(this.youthF/2.0);
+        // since we allocate two people per tent, following certain guidelines, divide
+        // each group by 2 and take the ceiling of it so everyone can have a space.
+        int totalTents = (int) Math.ceil(this.adultM / 2.0);
+        totalTents += (int) Math.ceil(this.adultF / 2.0);
+        totalTents += (int) Math.ceil(this.youthM / 2.0);
+        totalTents += (int) Math.ceil(this.youthF / 2.0);
         totalTents += (int) extraTents;
 
         // return the value
@@ -112,97 +112,97 @@ public class Unit implements Serializable, Basic{
 
     } // end getTents
 
-    public int getYouthM(){
-        
+    public int getYouthM() {
+
         // return the total youth
         return this.youthM;
 
     } // end getYouthM
 
-    public int getYouthF(){
-        
+    public int getYouthF() {
+
         // return the total youth
         return this.youthF;
 
     } // end getYouthf
-    
-    public int getAdultM(){
+
+    public int getAdultM() {
 
         // return the num of adultM
         return this.adultM;
 
     } // end getAdultM
 
-    public int getAdultF(){
+    public int getAdultF() {
 
         // return the num of adultF
         return this.adultF;
 
     } // end getAdultF
 
-    public void setYouthM(int num){
+    public void setYouthM(int num) {
 
         // set the number of youthM to the given amount
         this.youthM = num;
 
     }// end setYouthM
-    
-    public void setYouthF(int num){
+
+    public void setYouthF(int num) {
 
         // set the number of youthM to the given amount
         this.youthF = num;
 
     }// end setYouthF
 
-    public void setAdultM(int num){
+    public void setAdultM(int num) {
 
         // set the number of youthM to the given amount
         this.adultM = num;
 
-    }// end setYouthM   
+    }// end setYouthM
 
-    public void setAdultF(int num){
+    public void setAdultF(int num) {
 
         // set the number of youthM to the given amount
         this.adultF = num;
 
-    }// end setAdultF   
+    }// end setAdultF
 
-    public int getID(){
+    public int getID() {
 
         // return the unit number
         return this.id;
 
     } // end getUnitNum
 
-    public void setID(int num){
+    public void setID(int num) {
 
         // set the unit number
         this.id = num;
 
     } // end setUnitNum
 
-    public void setExtraCots(int number){
+    public void setExtraCots(int number) {
 
         // set the number of extra cots to number
         this.extraCots = number;
-   
+
     } // end setExtraCots
-    
-    public void setExtraTents(int number){
+
+    public void setExtraTents(int number) {
 
         // set the number of extra tents to the number
         this.extraTents = number;
 
     } // end setExtraTents
 
-    public void menu(){
+    public void menu() {
 
         // define sentry variable
         boolean keepGoing = true;
 
         // loop to control the menu
-        while(keepGoing){
+        while (keepGoing) {
 
             // create the new scanner for input
             Scanner input = new Scanner(System.in);
@@ -227,12 +227,12 @@ public class Unit implements Serializable, Basic{
             System.out.println();
 
             // input handling
-            if(response.equals("0")){
+            if (response.equals("0")) {
 
                 // quit
                 keepGoing = false;
 
-            } else if(response.equals("1")){
+            } else if (response.equals("1")) {
 
                 // change the unit number
                 int num = integerInput("What would you like the new number to be?: ");
@@ -241,35 +241,35 @@ public class Unit implements Serializable, Basic{
                 // confirmation message
                 System.out.println("Ok your unit number is now " + this.getID());
 
-            } else if(response.equals("2")){
-                
+            } else if (response.equals("2")) {
+
                 // change the number of members in the unit
                 this.youthM = integerInput("How many youth (m) do you have?");
                 this.youthF = integerInput("How many youth (f) do you have?");
                 this.adultM = integerInput("How many adults (m) do you have?");
                 this.adultF = integerInput("How many adults (f) do you have?");
-            
-            } else if(response.equals("3")){
+
+            } else if (response.equals("3")) {
 
                 // change the number of needed cots
                 System.out.println(this.getCots() - this.extraCots + " + " + this.extraTents + " extra requested = " + this.getCots() + " total cots");
                 int num = integerInput("How many extra cots are needed? ");
                 this.setExtraCots(num);
-                
+
                 // confirm message
                 System.out.println("Ok you now have " + this.getCots() + " cots");
 
-            } else if(response.equals("4")){
+            } else if (response.equals("4")) {
 
                 // change the number of needed tents
-                System.out.println(this.getTents() - this.extraTents + " + " + this.extraTents + " extra requested = " + this.getTents() + " total tents"); 
+                System.out.println(this.getTents() - this.extraTents + " + " + this.extraTents + " extra requested = " + this.getTents() + " total tents");
                 int num = integerInput("How many extra tents are needed? ");
                 this.setExtraTents(num);
-            
+
                 // confirm message
                 System.out.println("Ok you now have " + this.getTents() + " tents");
 
-            } else if(response.equals("5")){
+            } else if (response.equals("5")) {
 
                 // print all of the information about the unit
                 this.printAllInfo();
@@ -282,9 +282,9 @@ public class Unit implements Serializable, Basic{
             } // end if/else block
         } // end while
     } // end menu
-    
-    public void printAllInfo(){
-        
+
+    public void printAllInfo() {
+
         // print out the current information for the troop
         System.out.println("Information about Unit #" + this.getID());
         System.out.println("Total Cots needed: " + this.getCots());
@@ -295,6 +295,6 @@ public class Unit implements Serializable, Basic{
         System.out.println("Total youth (f): " + this.getYouthF());
         System.out.println("Total adults (m): " + this.getAdultM());
         System.out.println("Total adults (f): " + this.getAdultF());
-    
-    } // end printAllInfo   
+
+    } // end printAllInfo
 } // end Unit
