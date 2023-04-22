@@ -118,6 +118,19 @@ public class Week implements Basic, Serializable{
         System.out.println("Total Cots: " + this.getCots());
 
     } // end getWeekInfo
+    
+    public void printSiteInfo(){
+        
+        // print out existing info
+        this.printWeekInfo(); 
+
+        // print out each of the hills info
+        this.wilderness.printSiteInfo();
+        this.checaugau.printSiteInfo();
+        this.pioneer.printSiteInfo();
+
+    } // end getSiteInfo
+
 
     public void printAllInfo(){
         
@@ -150,10 +163,11 @@ public class Week implements Basic, Serializable{
             System.out.println("Menu for week " + this.id);
             System.out.println("0) Quit");
             System.out.println("1) See some info");
-            System.out.println("2) See all info");
-            System.out.println("3) Edit Wilderness");
-            System.out.println("4) Edit Checaugau");
-            System.out.println("5) Edit Pioneer");
+            System.out.println("2) See site info");
+            System.out.println("3) See all info");
+            System.out.println("4) Edit Wilderness");
+            System.out.println("5) Edit Checaugau");
+            System.out.println("6) Edit Pioneer");
 
             // store the response in response
             String response = input.nextLine();
@@ -174,22 +188,27 @@ public class Week implements Basic, Serializable{
 
             } else if(response.equals("2")){
                 
+                // print site info
+                this.printSiteInfo();
+
+            }else if(response.equals("3")){
+                
                 // print all of the info
                 this.printAllInfo(); 
 
-            } else if(response.equals("3")){
+            } else if(response.equals("4")){
 
                 // edit the wilderness hill
                 System.out.println("Now editing Wilderness...");
                 this.wilderness.menu();
 
-            } else if(response.equals("4")){
+            } else if(response.equals("5")){
             
                 // edit the checaugau hill
                 System.out.println("Now editing Checaugau...");
                 this.checaugau.menu();
 
-            } else if(response.equals("5")){
+            } else if(response.equals("6")){
             
                 // edit the pioneer hill
                 System.out.println("Now editing Pioneer...");
@@ -203,6 +222,4 @@ public class Week implements Basic, Serializable{
             } // end if/else block
         } // end while
     } // end menu
-
-
 } // end Week

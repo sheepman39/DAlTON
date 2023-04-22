@@ -26,9 +26,12 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
     } // end Hill
 
     public Hill(String name){
+
         this.name = name;
         this.id = -1;
+    
     } // end constructor
+    
     public int getID(){
 
         // returnt the id
@@ -96,6 +99,37 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
     } // end printHillInfo()
     
+    public void printSiteInfo(){
+        
+        // call printHillInfo
+        this.printHillInfo();
+
+        // find just the cots/tents needed per site
+        // print out each site info
+        GenericNode <Site> currentNode = this.dataLL.getNode(0);
+        
+        // buffer
+        System.out.println();
+
+        // iterate through each of the sites
+        while(currentNode != null){
+
+            // temp site
+            Site tempSite = currentNode.getData();
+
+            // print the sites data
+            System.out.println();
+            System.out.println("Information for Site #" + tempSite.getID());
+            System.out.println("Cots needed: " + tempSite.getCots());
+            System.out.println("Tents needed: " + tempSite.getTents());
+            System.out.println();
+
+            // set the next node
+            currentNode = currentNode.getNext();
+
+        } // end while loop
+    } // end printSiteInfo
+
     public void printAllInfo(){
 
         // print out the hill info
@@ -139,8 +173,9 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
             System.out.println("Menu for " + this.name);
             System.out.println("0) Quit");
             System.out.println("1) See some hill info");
-            System.out.println("2) See all hill info");
-            System.out.println("3) Edit a site");
+            System.out.println("2) See some site info");
+            System.out.println("3) See all hill info");
+            System.out.println("4) Edit a site");
 
             // store the response in response
             String response = input.nextLine();
@@ -161,10 +196,15 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
             } else if(response.equals("2")){
                 
+                // print hill + site info 
+                this.printSiteInfo();
+
+            }else if(response.equals("3")){
+                
                 // print all of the info
                 this.printAllInfo(); 
 
-            } else if(response.equals("3")){
+            } else if(response.equals("4")){
                 
                 // message to edit
                 System.out.println("Please select a site to edit");

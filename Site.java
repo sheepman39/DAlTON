@@ -3,16 +3,12 @@ import java.util.*;
 import java.io.*;
 
 public class Site extends Collection<Unit> implements Serializable, Basic{
-    
-    // site number
-    int id;
 
     public static void main(String[] args){
 
         Site testSite = new Site();
 
         testSite.menu();
-
 
     } // end main
 

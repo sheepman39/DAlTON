@@ -525,8 +525,4 @@ public class Main{
         // return the value
         return returnValue;
     } // end weekSelect
-
-
-
-
 } // end main
