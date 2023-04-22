@@ -10,8 +10,19 @@ classDiagram
 
         + menu()
 
-        + calculateWeeks(Week, Week)
-        + calculateHills(Hill, Hill)
+        + compareWeeks(Week, Week)
+        + compareHills(Hill, Hill)
+
+        + weekSelect() int 
+        + sortWeeks()
+
+        + resetFile()
+
+        + printAllInfo()
+        + printSomeInfo()
+        + deleteWeek(int) 
+        + addWeek(int)
+
     }
     class Week{
         - id
@@ -34,12 +45,26 @@ classDiagram
         + getCots() int 
         + getTents() int 
         + itemSelect() int
+
         + printAllInfo()
+        + printSiteInfo()
+        + printWeekInfo()
         
     }
     class Hill{
-        - siteLL      
+        - dataLL<Site>  
         - id  
+        - name
+
+        + Hill()
+        + Hill(int)
+        + Hill(String)
+
+        + getID() int 
+        + setID(int)
+
+        + getName() String
+        + setName(String)
 
         + getSites(): siteLL
         + getCots(): int
@@ -52,12 +77,17 @@ classDiagram
         + printAllInfo()
         + printHillInfo()
 
-        + addSite(int)
-        + deleteSite(int)
+        + addItem()
+        + addItem(int)
+        + deleteItem(int)
+
+        + printHillInfo()
+        + printSiteInfo()
+        + printAllInfo()
     }
 
     class Site {
-        - dataLL
+        - dataLL<Unit>
         - id 
 
         + Site()
@@ -65,13 +95,13 @@ classDiagram
 
         + menu()
         + printAllInfo()
-        + unitSelect() int
+        + itemSelect() int
         
         + getCots() int
         + getTents() int
 
-        + addUnit()
-        + deleteUnit()
+        + addItem()
+        + deleteItem()
 
         + getID() int 
         + setID(int)
@@ -112,6 +142,13 @@ classDiagram
         + printAllInfo()
 
         + integerInput(str) STATIC
+    }
+
+    class Compare{
+        - needQ
+        - hasQ
+        + init(GenericQ<int[]>, GenericQ<int[]>)
+        + move(int[], int[], String, PrintWriter)
     }
 
     class GenericQ{
@@ -176,6 +213,7 @@ classDiagram
     Hill o-- Site
     Week o-- Hill
     Main o-- Week
+    Main o-- Compare
     GenericQ o-- GenericNode
     GenericLL o-- GenericNode
     Site o-- GenericLL
