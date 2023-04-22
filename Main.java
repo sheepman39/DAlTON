@@ -80,28 +80,52 @@ public class Main{
     } // end print some info
 
     public void compareWeeks(Week week1, Week week2){
-   
-        // goal: compare each hill, site ect
-        // compare wilderness
-        GenericLL<Site> chec1 = week1.getChec().getSites();
-        GenericLL<Site> chec2 = week2.getChec().getSites();
 
-        GenericLL<Site> wild1 = week1.getWild().getSites();
-        GenericLL<Site> wild2 = week2.getWild().getSites();
+        // since we want to save this data to a file, we will create that file here
+        try{
+            // create a new file based on the id's of the two weeks
+            String fileName = "Week" + week1.getID() + "ToWeek" + week2.getID() + ".txt";
+            FileWriter outFile = new FileWriter(fileName, false);
+            PrintWriter output = new PrintWriter(outFile);
 
-        GenericLL<Site> pio1 = week1.getPio().getSites();
-        GenericLL<Site> pio2 = week2.getPio().getSites();
+            // goal: compare each hill, site ect
+            // compare wilderness
+            GenericLL<Site> chec1 = week1.getChec().getSites();
+            GenericLL<Site> chec2 = week2.getChec().getSites();
 
-        this.compareHills(wild1, wild2);
-        System.out.println();
-        this.compareHills(chec1, chec2);
-        System.out.println();
-        this.compareHills(pio1, pio2);
-        System.out.println();
-    
+            GenericLL<Site> wild1 = week1.getWild().getSites();
+            GenericLL<Site> wild2 = week2.getWild().getSites();
+
+            GenericLL<Site> pio1 = week1.getPio().getSites();
+            GenericLL<Site> pio2 = week2.getPio().getSites();
+            
+            output.println("=======Wilderness=======");
+            this.compareHills(wild1, wild2, output);
+            System.out.println();
+            output.println();
+
+            output.println("=======Checaugau========");
+            this.compareHills(chec1, chec2, output);
+            System.out.println();
+            output.println();
+
+            output.println("========Pioneer=========");
+            this.compareHills(pio1, pio2, output);
+            System.out.println();
+            output.println();
+            
+            // close the files
+            outFile.close();
+            output.close();
+
+            // confirmation message
+            System.out.println("Results saved to " + fileName);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        } // end try/catch block
     } // end compareWeeks
 
-    public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2){
+    public void compareHills(GenericLL<Site> week1, GenericLL<Site> week2, PrintWriter output){
 
         // get the head nodes for both weeks
         GenericNode<Site> currentNode1 = week1.getNode(0);
@@ -178,15 +202,18 @@ public class Main{
         } // end while loop
 
         // create an instance of the compare class
+        output.println("Cots:");
         Compare cotCompare = new Compare();
         cotCompare.init(needCotQ, hasCotQ);
-        cotCompare.move(needCotQ.pop(), hasCotQ.pop(), "cots");
+        cotCompare.move(needCotQ.pop(), hasCotQ.pop(), "cots", output);
 
         System.out.println();
+        output.println();
+        output.println("Tents:");
 
         Compare tentCompare = new Compare();
         tentCompare.init(needTentQ, hasTentQ);
-        tentCompare.move(needTentQ.pop(), hasTentQ.pop(), "tents");
+        tentCompare.move(needTentQ.pop(), hasTentQ.pop(), "tents", output);
 
         System.out.println();
     } // end compareHill

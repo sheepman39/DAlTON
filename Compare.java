@@ -1,4 +1,5 @@
 // Compare.java
+import java.io.*;
 
 public class Compare{
     
@@ -19,7 +20,7 @@ public class Compare{
     } // end init
 
 
-    public void move(int[] need, int[] has, String type){
+    public void move(int[] need, int[] has, String type, PrintWriter output){
 
         // check if need or has is null
         if(need == null){
@@ -28,7 +29,7 @@ public class Compare{
 
             while(currentSet != null){
 
-                System.out.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra " + type);
+                output.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra " + type);
                 currentSet = this.hasQ.pop();
 
             } // end while loop
@@ -39,39 +40,40 @@ public class Compare{
 
             while(currentSet != null){
 
-                System.out.println("Site " + currentSet[0] + " needs " + currentSet[1] + " more " + type);
+                output.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra " + type);
                 currentSet = this.needQ.pop();
 
             } // end while loop
 
         } else if(Math.abs(need[1]) > Math.abs(has[1])){
-            System.out.println("Move " + Math.abs(has[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
+            
+            output.println("Move " + Math.abs(has[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
             need[1] = need[1] + has[1];
             has[1] = 0;
 
-             // recursion
-             this.move(need, hasQ.pop(), type);
+            // recursion
+            this.move(need, hasQ.pop(), type, output);
         } else if(Math.abs(need[1]) == Math.abs(has[1])){
             
             // if the need and the has contain the same amount, set them both to 0
-            System.out.println("Move " + Math.abs(has[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
+            output.println("Move " + Math.abs(has[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
             
             need[1] = 0;
             has[1] = 0;
 
             // recursion
-            this.move(needQ.pop(), hasQ.pop(), type);
+            this.move(needQ.pop(), hasQ.pop(), type, output);
             
         } else if(Math.abs(need[1]) < Math.abs(has[1])){
 
-            System.out.println("Move " + Math.abs(need[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
+            output.println("Move " + Math.abs(need[1]) + " " + type + " from site " + has[0] + " to site " + need[0]);
             
             // set the has to has +  need and need to 0
             has[1] = need[1] + has[1];
             need[1] = 0;
             
             // recursion
-            this.move(needQ.pop(), has, type);
+            this.move(needQ.pop(), has, type, output);
         } // end if/else block
     } // end move
 } // end Compare

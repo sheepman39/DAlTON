@@ -1,0 +1,48 @@
+=======Wilderness=======
+Cots:
+Move 4 cots from site 8 to site 7
+Move 1 cots from site 6 to site 7
+Site 7 has 1 extra cots
+Site 5 has 9 extra cots
+Site 2 has 4 extra cots
+
+Tents:
+Move 1 tents from site 8 to site 7
+Move 3 tents from site 8 to site 5
+Move 1 tents from site 1 to site 5
+Move 2 tents from site 1 to site 2
+Site 2 has 1 extra tents
+
+=======Checaugau========
+Cots:
+Move 2 cots from site 9 to site 10
+Move 7 cots from site 9 to site 15
+Move 1 cots from site 11 to site 15
+Site 14 has 8 extra cots
+Site 12 has 1 extra cots
+
+Tents:
+Move 1 tents from site 9 to site 11
+Move 3 tents from site 9 to site 15
+Move 1 tents from site 9 to site 12
+Site 9 has 2 extra tents
+Site 10 has 1 extra tents
+Site 14 has 7 extra tents
+
+========Pioneer=========
+Cots:
+Move 3 cots from site 17 to site 18
+Move 1 cots from site 21 to site 18
+Move 2 cots from site 21 to site 16
+Move 3 cots from site 21 to site 20
+Site 21 has 2 extra cots
+Site 19 has 15 extra cots
+
+Tents:
+Move 1 tents from site 17 to site 16
+Move 1 tents from site 17 to site 20
+Move 2 tents from site 21 to site 20
+Site 21 has 5 extra tents
+Site 18 has 1 extra tents
+Site 19 has 8 extra tents
+
