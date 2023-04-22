@@ -187,5 +187,4 @@ public abstract class Collection<Type extends Basic> implements Serializable {
         // return the value
         return returnValue;
     } // end getItem
-
 } // end Collection
