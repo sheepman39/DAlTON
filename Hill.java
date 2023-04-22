@@ -4,6 +4,9 @@ import java.io.*;
 
 public class Hill extends Collection<Site> implements Serializable, Basic{
 
+    // name
+    String name;
+
     public static void main(String[] args){
 
         // test harness
@@ -13,12 +16,19 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
     } // end main
 
     public Hill(){
+        this.id = -1;
+        this.name = null;
     } // end constructor
 
     public Hill(int id){
         this.id = id;
+        this.name = null;
     } // end Hill
 
+    public Hill(String name){
+        this.name = name;
+        this.id = -1;
+    } // end constructor
     public int getID(){
 
         // returnt the id
@@ -33,9 +43,26 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
     } // end setID
 
+    public String getName(){
+
+        // return the name
+        return this.name;
+
+    } // end getName
+
+    public void setName(String name){
+
+        // set the name to the provided one
+        this.name = name;
+
+    } // end setName
+
     public GenericLL getSites(){
+
         return this.dataLL;
+    
     } // end getSites
+    
     public void addItem(){
 
         // prompt the user for what the new site number should be
@@ -62,7 +89,7 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
     public void printHillInfo(){
 
         // print the information about this hill
-        System.out.println("Information about this hill: ");
+        System.out.println("Information about " + this.getName() + ": ");
         System.out.println("This hill has " + this.dataLL.length() + " sites");
         System.out.println("Cots needed: " + this.getCots());
         System.out.println("Tents needed: " + this.getTents());
@@ -109,7 +136,7 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
 
             // options
             System.out.println();
-            System.out.println("Menu for hill #" + this.id);
+            System.out.println("Menu for " + this.name);
             System.out.println("0) Quit");
             System.out.println("1) See some hill info");
             System.out.println("2) See all hill info");
@@ -162,5 +189,3 @@ public class Hill extends Collection<Site> implements Serializable, Basic{
         } // end while
     } // end menu
 } // end Hill
-    
-

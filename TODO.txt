@@ -1,0 +1,5 @@
+TODO
+- clean up UI
+- change the type of information printed when printing information
+- add week that already exists error
+- clarify the sub-menus 

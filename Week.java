@@ -8,9 +8,9 @@ public class Week implements Basic, Serializable{
     int id;
 
     // since each hill is not connected in any way, we will not put them in any sort of data structure.  They must be processed separately
-    Hill wilderness = new Hill(0);
-    Hill checaugau = new Hill(1);
-    Hill pioneer = new Hill(2);
+    Hill wilderness = new Hill("Wilderness");
+    Hill checaugau = new Hill("Checaugau");
+    Hill pioneer = new Hill("Pioneer");
 
     public static void main(String[] args){
     
