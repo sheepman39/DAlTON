@@ -173,15 +173,6 @@ Output - none
 
 Steps - create a new site called tempUnit.  The unit constructor will handle all input for the information.  Then, append it to the end of dataLL
 
-### Site.deleteItem(int i)
-Goal - delete a unit in the unit linked list
-
-Input - an integer representing the index of the list is needed
-
-Output - None
-
-Steps - run the delete method of the linked list
-
 ### Site.setID(int siteNum)
 Goal - Set the sites id as the provided one
 
@@ -211,11 +202,10 @@ Steps - create a boolean variable called keepGoing and set it to true.  Then use
 |Option|Description|Method|
 |---|---|---|
 |0|Quit|keepGoing = false|
-|1|Change site number|.setSiteNum|
-|2|See all info|lots of stuff|
-|3|Add a unit|.addUnit()|
-|4|Edit a unit|unit.menu()|
-|5|Delete a unit|unitLL.delete()|
+|1|See all info|lots of stuff|
+|2|Add a unit|.addUnit()|
+|3|Edit a unit|unit.menu()|
+|4|Delete a unit|unitLL.delete()|
 
 With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions.
 
@@ -244,6 +234,15 @@ Output - none
 
 Steps - set the id of the hill to the provided one
 
+### Hill.Hill(String name)
+Goal - create a new hill with the name name
+
+Input - a string containing the name
+
+Output - none
+
+Steps - set the name to name
+
 ### Hill.setID(int num)
 Goal - set the ID of the hill
 
@@ -252,6 +251,33 @@ Input - an integer containing an id
 Output - none
 
 Steps - set the id of the hill to the provided one
+
+### Hill.getID()
+Goal - return the id of the hill
+
+Input - none
+
+Output - integer containing the hill id
+
+Steps - return this.id
+
+### Hill.getName(): String
+Goal - return the name of the hill
+
+Input - none
+
+Output - string with the name of the hill
+
+Steps - return this.name
+
+### Hill.setName(String name)
+Goal - set the name
+
+Input - string with name
+
+Output - none
+
+Steps - set this.name to name
 
 ### Hill.addItem() and Hill.addItem(int siteNum)
 Goal - add a site to the hill's dataLL
@@ -270,6 +296,15 @@ Input - none
 Output - Information about the hill
 
 Steps - print out a line telling how many sites the hill has along with how many cots and tents are needed
+
+### Hill.printSiteInfo()
+Goal - print out a small amount of information about the hill and sites
+
+Input - none
+
+Output - Information about the hill
+
+Steps - print out the hill info and then print out the site num, cots, and tents for each site in the hill 
 
 ### Hill.printAllInfo()
 Goal - print out all of the information about a hill
@@ -292,8 +327,9 @@ Steps - create a boolean variable called keepGoing and set it to true.  Then use
 |---|---|---|
 |0|Quit|keepGoing = false|
 |1|See some hill info|.printHillInfo|
-|2|See all hill info| .printAllInfo|
-|3|Edit a site|.menu()|
+|2|See some site info|.printSiteInfo|
+|3|See all hill info| .printAllInfo|
+|4|Edit a site|.menu()|
 
 With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions. 
 
@@ -329,6 +365,51 @@ Output - an integer representing the number of cots/tents needed
 
 Steps - create a counter variable and set it to 0.  Then increment it by each of the hills .getCots method.  Return the counter variable
 
+### Week.setID(int num)
+Goal - set the ID of the week
+
+Input - an integer containing an id
+
+Output - none
+
+Steps - set the id of the week to the provided one
+
+### Week.getID()
+Goal - return the id of the week
+
+Input - none
+
+Output - integer containing the week id
+
+Steps - return this.id
+
+### printWeekInfo()
+Goal - print information about the week
+
+Input - none
+
+Output - lines describing the hill
+
+Steps - print out the week id, number of tents and cots needed
+
+### printSiteInfo()
+Goal - print information about the sites
+
+Input - none
+
+Output - lines describing the week
+
+Steps - print out the week info then print out the site info for wilderness, checaugau, and pioneer
+
+### printAllInfo()
+Goal - print all of the information about a given week
+
+Input - none
+
+Output - lines containing information
+
+Steps - print out the week info, then print out all info for all of the hills
+
 ### Week.menu()
 Goal - create a menu the user can use to edit the week
 
@@ -341,12 +422,113 @@ Steps - create a boolean variable called keepGoing and set it to true.  Then use
 |---|---|---|
 |0|Quit|keepGoing = false|
 |1|See some week info|.printWeekInfo|
-|2|See all info| .printAllInfo|
-|3|Edit Wilderness|.menu()|
-|4|Edit Checaugau|.menu()|
-|5|Edit Pioneer|.menu()|
+|2|See site info| .printSiteInfo|
+|3|See all info| .printAllInfo|
+|4|Edit Wilderness|.menu()|
+|5|Edit Checaugau|.menu()|
+|6|Edit Pioneer|.menu()|
 
 With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions. 
+
+---
+### Main
+Goal - the main class is going to hold all of the weeks, handle any file io needed, be where the main menu is, and compare each of the weeks
+
+### Main.addWeek(int weekNum)
+Goal - add a new week with the id of the given weekNum
+
+Input - integer containing the id of the week
+
+Output - none
+
+Steps - create a new week called tempWeek.  Then set the id to weekNum.  Add this to the weekList arraylist.  Then call this.sortWeeks() to sort the list
+
+### Main.deleteWeek(int index)
+Goal - delete a week with a given index
+
+Input - integer representing the location of the week in the arraylist
+
+Output - none
+
+Steps - remove the index from the weeklist
+
+### Main.printSomeInfo() and Main.printAllInfo()
+Goal - print some general info
+
+Input - none
+
+Output - information on the camp
+
+Steps - print out the number of week we have.  Then use a loop to iterate over weekList and print the week information from each of them.
+Print all info does the same thing but calls .printAllInfo for each week
+
+### Main.compareWeeks(Week week1, Week week2)
+Goal - open a file to write the changes to and prepare the data to be compared in hills
+
+Input - two weeks to switch from
+
+Output - a file with the change information
+
+Steps - First, enclose everything in a try/catch block since we are working with file io.  Then get the GenericLL\<Site\> from each of the hills in the respective weeks so it will be called chec1, chec2, wild1, wild2, ect.  Then, run the compareHills method for each of the hills.  If anything happens, the catch block will catch the exception and print it out.  
+
+### Main.compareHills(GenericLL\<Site\> week1, GenericLL\<Site\> week2, PrintWriter output)
+Goal - calculate the differences in each site 
+
+Input - two linked lists containing sites and the output writer for file io
+
+Output - none
+
+Steps - get the heads for both weeks and label them currentNode1 and 2 respectively.  Then create 4 queues containing an array of integers.  needCotQ and needTentQ will store the number of cots/tents a site will need and hasCotQ/hasTentQ will store the number of excess cots a site has.  We will go through both of the lists with a while loop.  First, get the sites from the current nodes.  Then calculate the cot/tent discrepancy and storing them in cotDiscrepancy and tentDiscrepancy.  Positive outcome represents that a site will need an item. Negative outcome represents that a site will have an excess of an item. 0 means unchanged.  Then create a tempCotArray with length 2 and a tempTentArray with length 2.  The 0 index of both of these will be the id of the current site.  The 1 index will be the discrepancy calculated.  If the discrepancy is > 0, add it to the needQ.  If it is <0 add it to the hasQ. Then get the next node until there are no more sites left.  Outside of the loop, we will create an instance of the compare class called cotCompare and tentCompare.  We will run the init method to pass the needQ and hasQ.  Then call the move method to calculate the changes needed.  
+
+### Main.menu()
+Goal - create a menu where the user can use the program
+
+Input - integers and responses from the user
+
+Output - none
+
+Steps - create a boolean variable called keepGoing and set it to true.  Then use a while loop to handle the input from the user.  Create a new scanner called input for user input.  Then print out the current information about the unit along with the menu of options
+|Option|Description|Method|
+|---|---|---|
+|0|Quit|keepGoing = false|
+|1|Print week highlights|.printSomeInfo|
+|2|Print all info|.printAllInfo|
+|3|Add a week|.addWeek(int)|
+|4|Edit a week|.weekSelect()|
+|5|Delete a week|.deleteWeek(int)|
+|6|Compare weeks|.compareWeeks|
+
+With the response being stored in response, we can use if/else statements to handle the input and complete the appropriate actions.
+
+### Menu.resetFile()
+Goal - in case the campData.dat file is unusable or nonexistent, create a new file with a new week.
+
+Input - None
+
+Output - a fresh campData.dat file
+
+Steps - since we will be dealing with file IO, we will need a try/catch block to help ensure nothing goes funky.  In the try block, we will use the File object to create a new campData.dat file.  Then we will create a new week and add it to the week arraylist so the user can keep running the program.  If there is an error, display an error message and quit the program since we are unable to store any files.
+
+### Main.save()
+Goal - save the data in the arrayList to the campData.dat file
+
+Input - weeks arrayList
+
+Output - a new campData.dat file with the latest data
+
+Steps - Since we will be dealing with file IO, we will need a try/catch block to help ensure nothing goes funky. In the try block, we will use the FileOutputStream and an object output stream to write the weeks list to the file.  If there is an exception, display an error message
+
+### Main.load()
+Goal - Load and initialize all of the data needed for the weeks
+
+Input - campData.dat file which contains an arrayList of weeks
+
+Output - None
+
+Steps - since we will be dealing with file IO, we will need a try/catch block to help ensure nothing goes funky.  In the try block, we will have a file input stream called fIn to input the campData.dat file.  Then we will turn that into an object input stream called obIn and use that to set the weeks arrayList to the value from that file. If there is a problem, an error will pop up and it will attempt to reset the campData.dat file by calling this.resetFile()
+
+### Main.sortWeeks()
+Goal - using an insertion sort, srot the 
 
 ---
 ### GenericNode
