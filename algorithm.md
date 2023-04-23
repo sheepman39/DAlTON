@@ -528,7 +528,22 @@ Output - None
 Steps - since we will be dealing with file IO, we will need a try/catch block to help ensure nothing goes funky.  In the try block, we will have a file input stream called fIn to input the campData.dat file.  Then we will turn that into an object input stream called obIn and use that to set the weeks arrayList to the value from that file. If there is a problem, an error will pop up and it will attempt to reset the campData.dat file by calling this.resetFile()
 
 ### Main.sortWeeks()
-Goal - using an insertion sort, srot the 
+Goal - using an insertion sort, sort the weekList so the week ids are in order
+
+Input - none
+
+Output - none
+
+Steps - first, start a for loop going through the size of the weeklist over i. Then set j to i and keepGoing to true.  While keepGoing, check if the current id is greater than the next one.  If it is and j >= 0, swap the two elements and decrease j by 1.  Else, end the loop.  
+
+### Main.weekSelect(): int
+Goal - create a menu that allows the user to select an item from the weeklist
+
+Input - integer from the user
+
+Output - the verified integer from the user
+
+Steps - first define a sentry variable called keepGoing and set it to true. Then set the return value to -1 as an invalid result.  Then create a while loop while keepGoing is true.  Then create a scanner called input and print out all of the items in the week list to select using a for loop.  Then define an Integer response to handle type conversion.  In a try/catch block, we are going to set keepGoing to false and then try to convert the nextInt from input and put it in response.  If anything goes wrong, the exception will be cought, keepGoing set to true, and the loop will be ran again.  If the conversion goes ok, we will check if it is 0.  If it is 0, then set keepGoing to false and return -1 as in no valid option was selected.  If the response is greater than 0 and less than the length of the weekList, set the returnValue to the response - 1 (since 0 was taken by quit, need to move the indices back). If any of the checks fail, prompt the user to input another valid response again.
 
 ---
 ### GenericNode

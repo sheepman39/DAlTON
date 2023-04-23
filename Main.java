@@ -24,18 +24,82 @@ public class Main {
 
     public void addWeek(int weekNum) {
 
-        // create a new week with the given weekNum
-        Week tempWeek = new Week();
-        tempWeek.setID(weekNum);
+        // check if a week with weekNum already exists using a binary search
+        if(!checkDuplicate(weekNum)){
+            // create a new week with the given weekNum
+            Week tempWeek = new Week();
+            tempWeek.setID(weekNum);
 
-        // append it to the end of the list
-        this.weekList.add(tempWeek);
+            // append it to the end of the list
+            this.weekList.add(tempWeek);
 
-        // sort the list
-        this.sortWeeks();
+            // sort the list
+            this.sortWeeks();
+        } else {
 
+            System.out.println("ERROR: Duplicate week id found. Please input a different week");
+        } // end if/else
     } // end addWeek
 
+    public boolean checkDuplicate(int weekNum){
+
+        // use a binary search to find an existing week
+        int listLength = this.weekList.size();
+    
+        // find the lower value
+        int low = 0;
+
+        // find the higher value
+        int high = listLength - 1;
+
+        // find the midle value
+        int mid = (low + high)/2;
+
+        // return value
+        boolean isFound = false;
+        
+        // sentry variable
+        boolean keepGoing = true;
+
+        // loop to control search
+        while(keepGoing){
+                
+            // reset midpoint
+            mid = (low + high)/2;
+            System.out.println("mid value " + this.weekList.get(mid).getID()); 
+            // if the id in the middle is less than the weekNum, set low to mid + 1
+            if(this.weekList.get(mid).getID() < weekNum){
+
+               low = mid + 1;
+
+            // if the id in the middle is greater than weekNum, set high to mid - 1
+            } else if(this.weekList.get(mid).getID() > weekNum){
+
+                high = mid -1;
+            
+            // if the value was found, set the return value to true
+            } else if(this.weekList.get(mid).getID() == weekNum){
+
+                isFound = true;
+                keepGoing = false;
+            
+            } else {
+
+                // should not be possible
+                System.out.println("CheckDuplicate ERROR");
+            
+            } // end if/else block
+
+            // if the low and high are equal, end the loop
+            if(low > high){
+
+                keepGoing = false;
+
+            } // end loop
+        } // end while loop
+        return isFound;
+    } // end checkDuplicate
+                
     public void deleteWeek(int index) {
 
         // delete a week
@@ -274,8 +338,6 @@ public class Main {
                 // add a week
                 // get an integer from the user
                 int weekNum = Unit.integerInput("What week number will the new week be? ");
-
-                System.out.println("Weeknum" + weekNum);
 
                 // add the week
                 this.addWeek(weekNum);
