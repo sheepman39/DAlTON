@@ -15,6 +15,7 @@ classDiagram
 
         + weekSelect() int 
         + sortWeeks()
+        + checkDuplicate(int) boolean
 
         + resetFile()
 

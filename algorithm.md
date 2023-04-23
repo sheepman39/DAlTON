@@ -443,6 +443,15 @@ Output - none
 
 Steps - create a new week called tempWeek.  Then set the id to weekNum.  Add this to the weekList arraylist.  Then call this.sortWeeks() to sort the list
 
+### Main.checkDuplicate(int weekNum): boolean
+Goal - check if a week with the given id already exists
+
+Input - integer representing the id of the week
+
+Output - a boolean value, true if a duplicate was found, false if nothing was found
+
+Steps - use a binary search algorithm to search for a week with the given id.  If it exists, return true.  If it does not exist, return false.
+
 ### Main.deleteWeek(int index)
 Goal - delete a week with a given index
 
@@ -544,6 +553,33 @@ Input - integer from the user
 Output - the verified integer from the user
 
 Steps - first define a sentry variable called keepGoing and set it to true. Then set the return value to -1 as an invalid result.  Then create a while loop while keepGoing is true.  Then create a scanner called input and print out all of the items in the week list to select using a for loop.  Then define an Integer response to handle type conversion.  In a try/catch block, we are going to set keepGoing to false and then try to convert the nextInt from input and put it in response.  If anything goes wrong, the exception will be cought, keepGoing set to true, and the loop will be ran again.  If the conversion goes ok, we will check if it is 0.  If it is 0, then set keepGoing to false and return -1 as in no valid option was selected.  If the response is greater than 0 and less than the length of the weekList, set the returnValue to the response - 1 (since 0 was taken by quit, need to move the indices back). If any of the checks fail, prompt the user to input another valid response again.
+---
+### Compare 
+Goal - create a class that can compare two hills and see what they need to move
+
+### Compare.init(GenericQ\<int[]\> needQ, GenericQ\<int[]\> hasQ)
+Goal - set the queues in the object to the provided ones
+
+Input - two queues that contain information about sites and resources
+
+Output - none
+
+Steps - set this.needQ to needQ and this.hasQ to hasQ
+
+### Compare.move(int[] need, int[] has, String type, PrintWriter output) 
+Goal - determine the easiest way to move supplies and write it to a file
+
+Input - two arrays of integers, the type of supplies, and a writer to output steps
+
+Output - file io
+
+Steps - first check if need is null.  If it is, then there is a surplus of supplies.  Set currentSet to has and start a while loop while the currentSet is not null.  In the loop, output the current site's id number and the number they have.  Then set currentSet to hasQ.pop().  
+If has is null, then set the currentSet to need and implement a similar process if need is null. If need is null or has is null is the base case of this recursive algorithm.
+If the absolute value of need[1] is greater than absolute value of has[1], then move all of the value from has to need. Set need[1] = need[1] + has[1] \(since has is negative) and has[1] to 0.  Then call this.move(need, hasQ.pop()...) to recursively calculate the move.
+If the absolute value of need[1] is less than absolute value of has[1], then there is more to move than there is needed.  Set need to 0 and has to need + has and then recursively call this.move(needQ.pop, has...)
+If abs value of need[1] is the same as abs value of has[1], then move all of the has to the need and set both of them to 0.  Then recursively call this.move(needQ.pop(), hasQ.pop..).
+
+
 
 ---
 ### GenericNode
