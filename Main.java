@@ -153,7 +153,7 @@ public class Main {
             PrintWriter output = new PrintWriter(outFile);
 
             // goal: compare each hill, site ect
-            // compare wilderness
+            // compare each hill
             GenericLL<Site> chec1 = week1.getChec().getSites();
             GenericLL<Site> chec2 = week2.getChec().getSites();
 
@@ -163,16 +163,19 @@ public class Main {
             GenericLL<Site> pio1 = week1.getPio().getSites();
             GenericLL<Site> pio2 = week2.getPio().getSites();
 
+            // compare wilderness
             output.println("=======Wilderness=======");
             this.compareHills(wild1, wild2, output);
             System.out.println();
             output.println();
 
+            // compre checaugau
             output.println("=======Checaugau========");
             this.compareHills(chec1, chec2, output);
             System.out.println();
             output.println();
 
+            // compare pioneer
             output.println("========Pioneer=========");
             this.compareHills(pio1, pio2, output);
             System.out.println();
