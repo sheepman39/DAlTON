@@ -383,7 +383,7 @@ Output - integer containing the week id
 
 Steps - return this.id
 
-### printWeekInfo()
+### Week.printWeekInfo()
 Goal - print information about the week
 
 Input - none
@@ -392,7 +392,7 @@ Output - lines describing the hill
 
 Steps - print out the week id, number of tents and cots needed
 
-### printSiteInfo()
+### Week.printSiteInfo()
 Goal - print information about the sites
 
 Input - none
@@ -401,7 +401,7 @@ Output - lines describing the week
 
 Steps - print out the week info then print out the site info for wilderness, checaugau, and pioneer
 
-### printAllInfo()
+### Week.printAllInfo()
 Goal - print all of the information about a given week
 
 Input - none
@@ -553,6 +553,7 @@ Input - integer from the user
 Output - the verified integer from the user
 
 Steps - first define a sentry variable called keepGoing and set it to true. Then set the return value to -1 as an invalid result.  Then create a while loop while keepGoing is true.  Then create a scanner called input and print out all of the items in the week list to select using a for loop.  Then define an Integer response to handle type conversion.  In a try/catch block, we are going to set keepGoing to false and then try to convert the nextInt from input and put it in response.  If anything goes wrong, the exception will be cought, keepGoing set to true, and the loop will be ran again.  If the conversion goes ok, we will check if it is 0.  If it is 0, then set keepGoing to false and return -1 as in no valid option was selected.  If the response is greater than 0 and less than the length of the weekList, set the returnValue to the response - 1 (since 0 was taken by quit, need to move the indices back). If any of the checks fail, prompt the user to input another valid response again.
+
 ---
 ### Compare 
 Goal - create a class that can compare two hills and see what they need to move
