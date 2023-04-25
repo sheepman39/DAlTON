@@ -45,7 +45,7 @@ public class Compare {
             // use a loop to find all of the sites that need materials
             while (currentSet != null) {
 
-                output.println("Site " + currentSet[0] + " has " + Math.abs(currentSet[1]) + " extra " + type);
+                output.println("Site " + currentSet[0] + " needs " + Math.abs(currentSet[1]) + " more " + type);
                 currentSet = this.needQ.pop();
 
             } // end while loop
